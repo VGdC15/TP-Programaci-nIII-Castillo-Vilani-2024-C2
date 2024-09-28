@@ -2,23 +2,19 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
     font-family: 'SUSE', sans-serif;
     background-color: #000;
 }
 
 /* Fondo ajustado al tamaño de la pantalla */
 #fondo {
-    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2; /* Para que el fondo esté debajo de todo */
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    
 }
 
 /* Contenedor que agrupa logo y formulario */
@@ -27,48 +23,33 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2; /* Por encima del fondo */
+    z-index: 2;
+    width: 100%;
 }
 
-/* Logo con margen superior e inferior */
+/* Logo con tamaño fluido */
 #logo {
-    width: 65%; /* Ajuste del tamaño del logo */
+    width: 60%;
+    max-width: 300px; /* Tamaño máximo del logo */
     height: auto;
-    margin-top: 3%; /* Margin solo arriba y abajo */
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 /* Estilo del formulario */
 .form-usuario {
-    background: rgba(94, 23, 235, 0.8); /* Fondo púrpura translúcido */
-    padding: 40px;
-    margin-bottom: 20%;
-    width: 100%;
+    background: rgba(94, 23, 235, 0.8);
     border-radius: 15px;
     box-shadow: 0px 0px 40px #5E17EB;
     text-align: center;
-}
-
-/* Estilo del input */
-.form-usuario input {
+    max-width: 500px; /* Para que no sea demasiado grande en pantallas amplias */
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #a28ccf;
 }
 
 /* Estilo del botón aceptar */
 #aceptar {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
     background-color: #5E17EB;
     border: none;
     border-radius: 5px;
-    color: white;
-    cursor: pointer;
 }
 
 #aceptar:hover {
@@ -77,4 +58,14 @@ body {
 
 #label {
     color: white;
+}
+
+/* Footer */
+footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+footer div {
+    color: #888888;
 }
