@@ -9,10 +9,10 @@
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-  }
-  
+}
 
 
+/* ------------------ Producto ------------------ */
 .main-producto{
     display: flex;
     margin: auto;
@@ -21,14 +21,16 @@
     background-color:transparent;
     width: 100vw;
     height:100vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    /* margin-left: 5vw;
+    margin-right: 5vw; */
 }
 
 #fotos-producto{
+    /* background-color: #460067; */
     flex-grow: 1.5;
     height: 70vh;
-    width: 20vw;
+    max-width:55vw;
+    width: 30%;
 }       
 
 #carousel{
@@ -61,9 +63,6 @@
     margin-top: 20px;
     margin-left:5px;
     font-family:"Jost";
-    /* font-family: "New Amsterdam", sans-serif;
-    font-size: 2.5em; */
-    /* color: #ff7b00; */
     color: #460067;
 }
 
@@ -74,7 +73,6 @@
 }
 
 #seleccion-talle p, #descripcion-simple p{
-    /* font-family: "New Amsterdam", sans-serif; */
     font-family: "Jost";
     font-size: 1.3em;
     margin-left: 5px;
@@ -120,15 +118,23 @@
 
 .descripcion-completa{
     display: flex;
-    width: 100%;
     justify-content: center;
-    /* align-items: center; */
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
+
 .descripcion{
+    padding: 1vw;
     flex-grow: 1;
     width: 50%;
 }
+
+.descripcion h3,h4,h5,p{
+    font-family:"Jost";
+}
+
 .ficha-tecnica{
+    padding:1vw;
     flex-grow: 1;
     width: 50%;
 }
@@ -142,4 +148,96 @@
 .caracteristica-valor p{
     margin-top: 15px;
     margin-bottom: 0px;
+    font-family:"Jost";
+}
+/* ------------------ Producto ------------------ */
+
+
+/* ------------------ Productos-listados ------------------ */
+.body-listado-productos{
+    background-color:#f3e4fa;                      
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.portada-listado-productos{
+    height:45vh;
+    width:100vw;
+}
+.portada-listado-productos img{
+    height: 45vh;
+    width: 100vw;
+    object-fit:cover;
+}
+
+.grid-productos{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 70vw;                         
+    gap: 10px;    
+    margin: 2vh;   
+    padding:1vh;
+}
+
+.producto{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 5%;
+    border-radius: 6px;
+    border-style: hidden;    
+}
+.producto:hover{
+    background-color: #cecece;
+    cursor: pointer;
+}
+
+.producto img{
+    width: 100%;
+    margin-bottom: 5%;
+    border-bottom: 2px solid #000000;
+}
+
+.producto p{
+    font-size: 1.2em;
+}
+
+.precio{
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    border:2px solid black;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.precio p{
+    margin-bottom: 0%;
+    margin-top: 0%;
+    color: #ffffff;
+    font-size: 1.3em;
+}
+
+.selector-paginas{
+    display: flex;
+    justify-content: space-between;
+    border-top:2px solid #000000;
+}
+
+.selector-paginas p{    
+    font-size: 1.2em;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+.selector-paginas p:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1.4em;
 }
