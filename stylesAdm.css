@@ -1,0 +1,63 @@
+/*body {
+    margin: 0;
+    padding: 0;
+    font-family: 'SUSE', sans-serif;
+    background-color: #000;
+}*/
+
+html, body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    font-family: 'SUSE', sans-serif;
+    background-color: #000; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Formulario */
+.form-adm {
+    background: rgba(94, 23, 235, 0.8);
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px #5E17EB;
+    text-align: center;
+    max-width: 500px; /* Para que no sea demasiado grande en pantallas amplias */
+    margin: 5%;
+    width: 100%;
+}
+
+/* Botón aceptar */
+#crearCuenta {
+    background-color: #5E17EB;
+    border: none;
+    border-radius: 5px;
+}
+
+#crearCuenta:hover {
+    background-color: #0a0a0a;
+}
+
+#label {
+    color: white;
+    text-align: left; 
+    margin-bottom: 0%;
+    margin-top: 0;
+}
+
+#input {
+    background-color: rgba(188, 179, 214, 0.2);
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+
+/* Footer */
+footer {
+    flex-shrink: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer div {
+    color: #888888;
+}
