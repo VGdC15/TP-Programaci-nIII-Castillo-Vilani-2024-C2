@@ -241,3 +241,112 @@
     cursor: pointer;
     font-size: 1.4em;
 }
+
+
+
+/* ---------------------- Nav ---------------------- */
+nav{
+    position:sticky;
+    top:0;
+    width: 100%;
+}
+.zocalo-superior{
+    display: flex;
+    justify-content: center;
+    background-color:#000000;
+    width: 100%;
+    border-bottom: 1px solid #ffffff;
+}
+#carousel{
+    height: fit-content;
+    width: 100%;
+}
+.carousel-item{
+    width: 100%;
+    height: fit-content;
+}
+.carousel-item  p{
+    margin-top: 1vh;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+.main-nav{
+    background-color: #000000;
+    height: 20vh;
+    width:100%;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+}
+
+.logo-nav{
+    height: 100%;
+    width: 20vw;
+}
+.logo-nav img{
+    height: 100%;
+    object-fit: contain;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+}
+
+.accesos{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+}
+
+/* Tengo que hacer un ACTIVE pero se comportan de manera diferente */
+.dropdown .btn, .btn-contacto{
+    background-color: #ffffff;
+    color: #000000;
+    font-family: "Jost";
+    font-size: 1.2vw;
+    border-style: hidden;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 10vw;
+    height: 5vh;
+    margin: 1vh;
+}
+
+
+.barra-busqueda{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.barra-busqueda form{
+    width: 40%;
+    background-color: #ffffff;
+    border-radius: 16px;
+    margin-right: 1vw;
+}
+
+.barra-busqueda .form-control{
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-style: hidden;
+}
+.barra-busqueda .form-control:focus {
+    box-shadow: none;
+}
+
+.barra-busqueda .btn{
+    border-style: hidden;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background-color: #460067;
+    color: #ffffff;
+}
+.barra-busqueda .btn:active{
+    background-color: #ff7300;
+}
