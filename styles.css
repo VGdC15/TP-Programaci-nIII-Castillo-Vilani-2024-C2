@@ -26,28 +26,27 @@
 }
 
 #fotos-producto{
-    /* background-color: #460067; */
     flex-grow: 1.5;
     height: 70vh;
     max-width:55vw;
     width: 30%;
 }       
 
-#carousel{
+#carousel-producto{
     height: 70vh;
 }
 
-.carousel-item{
+#carousel-producto .carousel-item{
     height: 70vh;
 }
 
-.carousel-item img{
+#carousel-producto .carousel-item img{
     width:100%;
     height: 100%;
     object-fit:contain;
 }
 
-#carousel .carousel-indicators button{
+#carousel-producto .carousel-indicators button{
     background-color: #460067;
 }
 
@@ -249,6 +248,7 @@ nav{
     position:sticky;
     top:0;
     width: 100%;
+    z-index: 100;
 }
 .zocalo-superior{
     display: flex;
@@ -257,15 +257,15 @@ nav{
     width: 100%;
     border-bottom: 1px solid #ffffff;
 }
-#carousel{
+#carousel-zocalo{
     height: fit-content;
     width: 100%;
 }
-.carousel-item{
+#carousel-zocalo .carousel-item{
     width: 100%;
     height: fit-content;
 }
-.carousel-item  p{
+#carousel-zocalo .carousel-item  p{
     margin-top: 1vh;
     text-align: center;
     color: #ffffff;
