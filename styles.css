@@ -14,7 +14,7 @@ body {
     height: 100vh;
     z-index: -2;
     object-fit: cover; /* Asegura que la imagen no se distorsione */
-    
+    opacity: 2;
 }
 
 /* Contenedor que agrupa logo y formulario */
