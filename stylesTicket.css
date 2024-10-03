@@ -15,44 +15,16 @@ html, body {
     max-width: 500px; /* Para que no sea demasiado grande en pantallas amplias */
     width: 100%;
     z-index: 2;
-
 }
 
-#titulo {
-    color:#fdfdfd;
-    text-align: left;
-    margin-bottom: 3%;
-}
-
-#Ingresar {
-    background-color: #5E17EB;
-    border: none;
-    border-radius: 5px;
-}
-
-#Ingresar:hover {
-    background-color: #0a0a0a;
-}
-
-#label {
+#label, #titulo {
     color: white;
-    text-align: left; 
-    margin-bottom: 1%;
-    margin-top: 1%;
 }
 
-#input {
+.caja-producto {
     background-color: rgba(188, 179, 214, 0.2);
-    margin-top: 1%;
+    padding: 1px;
+    padding-left: 20px;
+    border-radius: 10px;
 }
 
-/* Footer */
-footer {
-    flex-shrink: 0;
-    width: 100%;
-    margin-top: auto;
-}
-
-footer div {
-    color: #888888;
-}
