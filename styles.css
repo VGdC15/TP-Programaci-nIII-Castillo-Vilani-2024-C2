@@ -173,10 +173,20 @@
     height:45vh;
     width:100vw;
 }
+
 .portada-listado-productos img{
     height: 45vh;
     width: 100vw;
     object-fit:cover;
+}
+
+@media (max-width:577px){
+    .portada-listado-productos{
+        height: 30vh;
+    }
+    .portada-listado-productos img{
+        height:30vh;
+    }
 }
 
 .grid-productos{
@@ -187,6 +197,21 @@
     gap: 10px;    
     margin: 2vh;   
     padding:1vh;
+}
+
+@media (max-width:577px){
+    .grid-productos{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+/* No me esta funcionando muy bien poner 2 columnas entre 2 tamaños */
+@media (min-width:577px) and (max-width:900px){
+    .grid-productos{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
 }
 
 .producto{
@@ -262,7 +287,7 @@
 
 /* ---------------------- Nav ---------------------- */
 nav{
-    /* position:sticky; */
+    position:sticky;
     top:0;
     width: 100%;    
     z-index: 100;
@@ -304,12 +329,14 @@ nav{
     height: 100%;
     width: 20vw;
 }
+
 .logo-nav img{
     height: 100%;
     object-fit: contain;
     border-top-left-radius: 26px;
     border-top-right-radius: 26px;
 }
+
 
 .accesos{
     display: flex;
@@ -319,7 +346,6 @@ nav{
     width: fit-content;
 }
 
-/* Tengo que hacer un ACTIVE pero se comportan de manera diferente */
 .dropdown .btn, .btn-contacto, #btn-inicio-abm{
     background-color: #ffffff;
     color: #000000;
@@ -375,16 +401,18 @@ nav{
 /* ALTO COLOR SOLIDO rgb(166, 128, 255); */
 /* ------------------------- */
 .main-abm{
-    position:fixed;
+    /* position:fixed; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 100vh;
+    min-height: 85vh;
     height: fit-content;
 }
 
+
 @media (min-width:577px){
+    /* Revisar que carajo quise hacer con esto */
     .main-abm, .opciones-principales{
         background-image: url('./imagenes/africa-twin-byn.png');
         background-size: cover;
@@ -422,25 +450,7 @@ nav{
     font-size: 4vh;
 }
 
-
-@media (max-width: 576px) {
-    .main-abm{
-        background-image: url('./imagenes/FONDO-chico.png');
-    }    
-    .opciones-principales{
-        padding: 2%;
-        justify-content: center;
-        background-color: #000000b8;
-    }
-    .opciones-principales button{
-        height: fit-content;
-        font-size: small;
-        margin: 1vh;
-    }
-}
-
 .opciones-principales button:hover{
-    /* box-shadow: 0 0 15px 5px #30006f80; Desenfoque difuminado */
     color: #000000;
     background-color: #ffffff;
 }
@@ -484,7 +494,7 @@ nav{
     align-items: center;
     background-color: #ffffff;
     width: 70vw;
-    min-height: 100vh   ;
+    min-height: 85vh;
     height: fit-content;
 }
 
@@ -496,6 +506,7 @@ nav{
     justify-content: center;
     align-items: center;
 }
+
 
 #div-inputs-texto{
     display: flex;
@@ -581,7 +592,6 @@ nav{
     margin-bottom: 2vh;
 }
 
-
 .form-modificar-producto{
     border:2px solid red;
     width: 100vw;
@@ -628,4 +638,50 @@ nav{
 
 .icono-prueba{
     width: 100px;
+}
+
+@media (max-width: 576px) {
+    .main-abm{
+        background-image: url('./imagenes/FONDO-chico.png');
+    }    
+    .main-nav{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo-nav{
+        width:50vw;
+    } 
+    #accion{
+        width: 100vw;
+    }
+    #div-inputs-texto{
+        padding: 1vh;
+    }
+    #div-imagenes-boton{
+        padding:1vh;
+    }
+    .opciones-principales{
+        flex-direction: column;
+        padding: 2%;
+        justify-content: center;
+        height:fit-content;
+        background-color: #000000b8;
+    }
+    .opciones-principales button{
+        height: fit-content;
+        font-size: small;
+        margin: 1vh;
+    }
+    #btn-inicio-abm{
+        font-size:large;
+        width:30vw;
+        height: fit-content;
+    }
+    .form-agregar-producto{
+        flex-direction: column;
+    }
+    #input-agregar-imagenes{
+        max-width: 100%;
+    }
 }

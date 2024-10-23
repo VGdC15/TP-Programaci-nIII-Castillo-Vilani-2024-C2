@@ -25,8 +25,7 @@ document.getElementById("btn-agregar-nuevo").addEventListener("click",function()
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
     document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
     document.getElementById("accion").appendChild(CrearFormAgregarProducto());
-    document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-agregar" }, "Agregar producto"))
-    CrearBtnBackHome();
+    document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-agregar" }, "Agregar producto"));
 })
 
 
@@ -44,35 +43,18 @@ document.getElementById("btn-modificar-producto").addEventListener("click",funct
 
 
 function EscucharProducto(elementoHTML,producto){
-    elementoHTML.addEventListener("click",function(){
-    document.getElementById("accion").innerHTML = "";       
-    document.getElementById("accion").appendChild(CrearPaginaModificar(producto));
-    document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-modificar" }, "Modificar producto"));
-    });
-    // for(let btnModificar of document.getElementsByClassName("btn-modificar")){
-    //     btnModificar.addEventListener("click",function(){
-    //         document.getElementById("accion").innerHTML = "";   
-    //         console.log(producto["marca"]);        
-    //         document.getElementById("accion").appendChild(CrearPaginaModificar(producto));
-    //         document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-modificar" }, "Modificar producto"));
-    //         CrearBtnBackHome()
+    // elementoHTML.addEventListener("click",function(){
+    // document.getElementById("accion").innerHTML = "";       
+    // document.getElementById("accion").appendChild(CrearPaginaModificar(producto));
+    // document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-modificar" }, "Modificar producto"));
+    // });
+    // for(let btnActivar of document.getElementsByClassName("btn-activar")){
+    //     btnActivar.addEventListener("click",function(event){
     //     })
     // }
-    for(let btnActivar of document.getElementsByClassName("btn-activar")){
-        btnActivar.addEventListener("click",function(event){
-        })
-    }
 }
 
 
-function CrearBtnBackHome(){
-    let btn = CrearElemento("button",{class:"btn-back-home"},"Volver al inicio");
-    document.getElementById("accion").appendChild(btn);
-    btn.addEventListener("click",function(){
-        document.getElementById("accion").remove();
-        document.getElementsByClassName("opciones-principales")[0].style.visibility = "visible";
-    })
-}
 
 
 function CrearElemento(tipo,atributos={},texto="") {
@@ -100,8 +82,6 @@ function CrearElementoProductoGrilla(producto){
     divProducto.appendChild(CrearImagenHTML(producto["img"]));
     divProducto.appendChild(CrearTituloHTML(producto));
     divProducto.appendChild(CrearPrecioHTML(producto));
-
-    // Creo que igual deberia escuchar el elemento aca
     return divProducto;
 }
 
@@ -126,6 +106,7 @@ function CrearOpcionesHTML(producto){
     let btnMod = document.createElement("button");
     btnMod.setAttribute("class","btn-modificar");
     btnMod.textContent = "Modificar";
+    EscucharBtnModProducto(btnMod,producto);
     let btnAct = document.createElement("button");
     btnAct.setAttribute("class","btn-activar");
     if(producto["estado"]==="activado"){
@@ -136,6 +117,14 @@ function CrearOpcionesHTML(producto){
     div.appendChild(btnMod);
     div.appendChild(btnAct);
     return div;
+}
+
+function EscucharBtnModProducto(btnElemento, producto){
+    btnElemento.addEventListener("click",function(){
+        document.getElementById("accion").innerHTML = "";       
+        document.getElementById("accion").appendChild(CrearPaginaModificar(producto));
+        document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-modificar" }, "Modificar producto"));
+    });
 }
 
 function CrearImagenHTML(url){        
