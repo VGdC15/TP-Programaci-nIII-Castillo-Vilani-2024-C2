@@ -180,14 +180,7 @@
     object-fit:cover;
 }
 
-@media (max-width:577px){
-    .portada-listado-productos{
-        height: 30vh;
-    }
-    .portada-listado-productos img{
-        height:30vh;
-    }
-}
+
 
 .grid-productos{
     display: grid;
@@ -199,20 +192,15 @@
     padding:1vh;
 }
 
-@media (max-width:577px){
-    .grid-productos{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-    }
-}
+
 
 /* No me esta funcionando muy bien poner 2 columnas entre 2 tamaños */
-@media (min-width:577px) and (max-width:900px){
+/* @media (min-width:577px) and (max-width:900px){
     .grid-productos{
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
     }
-}
+} */
 
 .producto{
     position: relative;
@@ -640,7 +628,20 @@ nav{
     width: 100px;
 }
 
+
 @media (max-width: 576px) {
+        /* Productos */
+    .grid-productos{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }    
+    .portada-listado-productos{
+        height: 30vh;
+    }
+    .portada-listado-productos img{
+        height:30vh;
+    }
+
     .main-abm{
         background-image: url('./imagenes/FONDO-chico.png');
     }    
@@ -683,5 +684,13 @@ nav{
     }
     #input-agregar-imagenes{
         max-width: 100%;
+    }
+}
+
+
+@media (min-width:577px) and (max-width:1200px){
+    .grid-productos{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
