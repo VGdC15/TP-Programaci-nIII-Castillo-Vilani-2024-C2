@@ -193,15 +193,6 @@
 }
 
 
-
-/* No me esta funcionando muy bien poner 2 columnas entre 2 tamaños */
-/* @media (min-width:577px) and (max-width:900px){
-    .grid-productos{
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-    }
-} */
-
 .producto{
     position: relative;
     background-color: #ffffff;
@@ -389,25 +380,18 @@ nav{
 /* ALTO COLOR SOLIDO rgb(166, 128, 255); */
 /* ------------------------- */
 .main-abm{
-    /* position:fixed; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 85vh;
     height: fit-content;
+    background-image: url('./imagenes/africa-twin-byn-apagada.png');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
-
-@media (min-width:577px){
-    /* Revisar que carajo quise hacer con esto */
-    .main-abm, .opciones-principales{
-        background-image: url('./imagenes/africa-twin-byn.png');
-        background-size: cover;
-        background-position: center; 
-        background-repeat: no-repeat;
-    }
-}
 
 #btn-inicio-abm{
     background-color: #fffafa;
@@ -464,6 +448,7 @@ nav{
 }
 
 .opciones button{
+    max-width: 40%;
     margin: 0.5vh;
     border-radius: 16px;
     border-style: hidden;
@@ -618,13 +603,13 @@ nav{
 }
 
 
-.div-prueba{
+.div-boton-icono{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.icono-prueba{
+.icono-opciones{
     width: 100px;
 }
 
@@ -634,7 +619,10 @@ nav{
     .grid-productos{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-    }    
+    } 
+    .opciones button{
+        font-size: x-large;
+    }   
     .portada-listado-productos{
         height: 30vh;
     }
@@ -688,7 +676,40 @@ nav{
 }
 
 
-@media (min-width:577px) and (max-width:1200px){
+@media (min-width:577px) and (max-width:1200px) and (min-height:800px){
+    .logo-nav{
+        width:35vw;
+    } 
+    #btn-inicio-abm{
+        font-size:large;
+        width:15vw;
+        max-width: 10%;
+        height: fit-content;
+    }
+    .opciones-principales{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .opciones-principales button{
+        height: fit-content;
+        font-size: large;
+        margin: 1vh;
+    }
+    .icono-opciones{
+        width: 20vw;
+    }
+
+
+    #accion{
+        width:100vw;
+    }
+    .form-agregar-producto{
+        flex-direction: column;
+    }   
+    .opciones button{
+        font-size:x-large;
+    }
+
     .grid-productos{
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
