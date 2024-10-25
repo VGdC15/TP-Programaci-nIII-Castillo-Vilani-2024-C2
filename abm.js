@@ -42,21 +42,6 @@ document.getElementById("btn-modificar-producto").addEventListener("click",funct
 
 
 
-function EscucharProducto(elementoHTML,producto){
-    // elementoHTML.addEventListener("click",function(){
-    // document.getElementById("accion").innerHTML = "";       
-    // document.getElementById("accion").appendChild(CrearPaginaModificar(producto));
-    // document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-modificar" }, "Modificar producto"));
-    // });
-    // for(let btnActivar of document.getElementsByClassName("btn-activar")){
-    //     btnActivar.addEventListener("click",function(event){
-    //     })
-    // }
-}
-
-
-
-
 function CrearElemento(tipo,atributos={},texto="") {
     let elemento = document.createElement(tipo);
     for (let clave in atributos) {
@@ -197,7 +182,6 @@ function Iterar(json){
         
     for(let producto of json){   
         let elementoHTML = CrearElementoProductoGrilla(producto);
-        EscucharProducto(elementoHTML,producto);
         grilla.appendChild(elementoHTML);    
     }
 }
