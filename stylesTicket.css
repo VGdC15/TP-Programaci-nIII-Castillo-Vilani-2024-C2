@@ -8,13 +8,14 @@ html, body {
 
 /* Formulario */
 .form-adm {
-    background: rgba(94, 23, 235, 0.8);
+    background: #5E17EB;
     border-radius: 15px;
     box-shadow: 0px 0px 10px #5E17EB;
     text-align: center;
     max-width: 500px; /* Para que no sea demasiado grande en pantallas amplias */
-    width: 100%;
+    width: 70%;
     z-index: 2;
+    margin: 2%;
 }
 
 #label, #titulo {

@@ -13,7 +13,7 @@ html, body {
     box-shadow: 0px 0px 10px #5E17EB;
     text-align: center;
     max-width: 500px; /* Para que no sea demasiado grande en pantallas amplias */
-    width: 100%;
+    width: 70%;
     z-index: 2;
 
 }
@@ -25,7 +25,7 @@ html, body {
 }
 
 #Ingresar {
-    background-color: #5E17EB;
+    background-color: rgba(188, 179, 214, 0.2); 
     border: none;
     border-radius: 5px;
 }
