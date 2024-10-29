@@ -17,17 +17,47 @@ export default class Producto{
         this.#descripcion = descripcion;   
     }
 
-    static TraerProductos(){
-        fetch("./productos.json")
-        .then(response => response.text())
-        .then(jsonString => {
-            this.Iterar(jsonString);
-        })
-        .catch(error => {
-            console.error("Error al traer los datos:", error);
-            reject(error);
-        });
+//  Deberia ponerlo en esta clase?
+    static CargarProductos(indiceInicial,data,direccion=null){
+        if(direccion){
+            document.getElementsByClassName("grid-productos").innerHTML = "";
+            indicePrimerProducto = FuncionesCarga.EstablecerIndiceInicial(indicePrimerProducto,direccion);    
+        }
+        for(let i=indiceInicial;i<indiceInicial+12;i++){
+            console.log(data[i]["img"]);
+            let producto = new Producto(data[i]["img"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);
+            let elementoHTML = this.CrearElementoProductoGrilla(producto);
+            document.getElementsByClassName("grid-productos")[0].appendChild(elementoHTML)
+        }
+        return indiceInicial;
     }
+
+
+    // static TraerProductos(){
+    //     return new Promise((resolve,reject)=>{
+    //         fetch("./productos.json")
+    //         .then(response => response.text())
+    //         .then(jsonString => {
+    //             resolve(jsonString);
+    //         })
+    //         .catch(error => {
+    //             console.error("Error al traer los datos:", error);
+    //             reject(error);
+    //         });
+    //     })
+    // }
+
+    static async TraerProductos(){
+        try{
+            const response = await fetch("./productos.json");
+            const jsonString = await response.text();
+            return JSON.parse(jsonString);
+        }catch(error){
+            console.error("Error al traer los datos:", error);
+            throw error;
+        }
+    }
+    
 
     static Iterar(json){
         json = JSON.parse(json);

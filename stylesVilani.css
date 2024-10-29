@@ -185,7 +185,7 @@
 .grid-productos{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     width: 70vw;                         
     gap: 10px;    
     margin: 2vh;   
@@ -266,7 +266,6 @@
 
 /* ---------------------- Nav ---------------------- */
 nav{
-    position:sticky;
     top:0;
     width: 100%;    
     z-index: 100;
@@ -720,4 +719,9 @@ nav{
     .opciones button{
         font-size: x-large;
     }       
+}
+
+
+footer{
+    width: 100vw;
 }
