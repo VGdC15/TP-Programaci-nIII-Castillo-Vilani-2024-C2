@@ -1,0 +1,107 @@
+[
+    {
+        "img":"LS2-902-gris-verde.png",
+        "marca":"LS2",
+        "modelo":"902 Scope / Gris-Verde",
+        "precio":"493000",
+        "tipo":"casco",
+        "estado":"desactivado",
+        "descripcion":"Esta es la descvd el ptrocutos"
+    },
+    {
+        "img":"LS2-908-rojo-naranja.webp",
+        "marca":"MAC",
+        "modelo": "ROCK RAY / Rojo-Naranja",
+        "precio":"269000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-399-negro-mate.png",
+        "marca":"LS2",
+        "modelo":"399 Valiant / Negro Mate",
+        "precio":"500000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"MAC-ROCKRAY-NARANJA.webp",
+        "marca":"MAC",
+        "modelo":"ROCK RAY / Negro mate",
+        "precio":"493000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-MX436-MATE-NEGRO.webp",
+        "marca":"LS2",
+        "modelo":"MX436 Pioneer/ Negro Mate",
+        "precio":"330000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-MX700-AMARILLO-ROJO.webp",
+        "marca":"LS2",
+        "modelo":"MX700 Subverter/ Amarillo-Negro",
+        "precio":"326000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"MAC-MX609-VIRTUS-NARANJA-CELESTE.webp",
+        "marca":"MAC",
+        "modelo":"MX609 VIRTUS / Naranja-Celeste",
+        "precio":"217000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-MX437-FAST-XCODE-NARANJA-AZUL-MATE.png",
+        "marca":"LS2",
+        "modelo":"MX437 Fast Xcode / Naranja-Azul",
+        "precio":"357000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"MAC-181-BOWIE-LUCKY-PLATEADO.webp",
+        "marca":"MAC",
+        "modelo":"181 Bowie Lucky / Plateado",
+        "precio":"110000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-570-VERSO-SPRING-GRIS-MATE.webp",
+        "marca":"LS2",
+        "modelo":"570 Verso Spring / Gris Mate",
+        "precio":"320000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"MAC-721-BEAT-CYRUS-ROJO-NEGRO.webp",
+        "marca":"MAC",
+        "modelo":"721 Beat Cyrus / Rojo-Negro",
+        "precio":"146000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-OF570-VERSO-MARKER-NEGRO-MATE.webp",
+        "marca":"LS2",
+        "modelo": "OF570 Verso Marker / Negro Mate",
+        "precio":"320000",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"MAC-181-BOWIE-LUCKY-PLATEADO.webp",
+        "marca":"Marca",
+        "modelo": "OF570 Verso Marker / Negro Mate",
+        "precio":"111111",
+        "tipo":"casco",
+        "estado":"activado"
+    }
+]
