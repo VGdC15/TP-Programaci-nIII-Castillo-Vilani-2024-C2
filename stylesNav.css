@@ -45,7 +45,7 @@ nav {
     width: 28%;
     margin-left: 0%;
     justify-content: start;
-
+    cursor: pointer;
 }
 
 .logo-nav img {

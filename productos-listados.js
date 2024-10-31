@@ -4,12 +4,15 @@ let indicePrimerProducto = 0;
 
 obtenerProductos();
 
+
+document.getElementsByClassName("btn-contacto")[0].addEventListener("click",()=>{
+    window.location.href = "./contacto.html";
+});
 document.getElementById("pagina-anterior").addEventListener("click",function(){
     obtenerProductos("anterior");
 });
 document.getElementById("pagina-siguiente").addEventListener("click",function(){
     obtenerProductos("siguiente");
-    console.log("siguiente");
 });
 
 
@@ -40,8 +43,9 @@ function EstablecerIndiceInicial(indiceInicial,direccion){
 function CargarProductos(indiceInicial,data,direccion=null){
     if(direccion){
         document.getElementsByClassName("grid-productos")[0].innerHTML = "";
-        indiceInicial = EstablecerIndiceInicial(indiceInicial,direccion);    
+        indiceInicial = EstablecerIndiceInicial(indiceInicial,direccion);
     }
+    console.log(indiceInicial);
     for(let i=indiceInicial;i<indiceInicial+12;i++){
         if(i<data.length){
             let producto = new Producto(data[i]["img"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);

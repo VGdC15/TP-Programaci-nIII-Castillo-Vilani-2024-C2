@@ -248,24 +248,39 @@
 .selector-paginas{
     display: flex;
     justify-content: space-between;
-    border-top:2px solid #000000;
 }
 
-.selector-paginas p{    
-    font-size: 1.2em;
-    margin-left: 1vw;
-    margin-right: 1vw;
+.selector-paginas button{
+    width: 12vw;
 }
-.selector-paginas p:hover{
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 1.4em;
+
+#pagina-anterior{
+    border-style: hidden;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    background-color: #a2a2a2;
+    /* margin-right: 2%; */
+    margin: 2%;
 }
+
+#pagina-siguiente{
+    border-style: hidden;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background-color: #a2a2a2;
+    /* margin-leftk: 2%; */
+    margin: 2%;
+}
+#pagina-siguiente:hover, #pagina-anterior:hover{
+    background-color: #bf3f10;
+}
+
+
 
 
 
 /* ---------------------- Nav ---------------------- */
-nav{
+/* nav{
     top:0;
     width: 100%;    
     z-index: 100;
@@ -371,7 +386,7 @@ nav{
 }
 .barra-busqueda .btn:active{
     background-color: #ff7300;
-}
+} */
 
 
 /* ---------------------- ABM ADMIN ---------------------- */
@@ -720,7 +735,6 @@ nav{
         font-size: x-large;
     }       
 }
-
 
 footer{
     width: 100vw;
