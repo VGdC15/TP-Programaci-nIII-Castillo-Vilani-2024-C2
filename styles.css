@@ -47,7 +47,7 @@ body {
 
 /* Botón aceptar */
 #aceptar {
-    background-color: #5E17EB;
+    background-color:  rgba(188, 179, 214, 0.2);
     border: none;
     border-radius: 5px;
 }

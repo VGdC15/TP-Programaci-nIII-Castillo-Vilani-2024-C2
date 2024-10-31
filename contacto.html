@@ -73,9 +73,46 @@
         </div>
     </nav>
 
+    <div class="position-relative w-100 flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+        
+        <!-- Imagen de fondo -->
+        <img src="DZ4a1TI - Imgur.png" alt="Fondo" class="position-absolute w-100 h-100" style="object-fit: cover; z-index: 1;">
+        
+        <div class="contacto-contenedor" style="z-index: 2;">
+            <!-- Atención al cliente -->
+            <div class="atencion-cliente">
+                <div class="form-adm p-4">
+                    <h1 id="titulo" class="text-center text-sm-start">Atención al cliente</h1>
+                    <h6>¿Necesitas asistencia?</h6>
+                    <p>Podés comunicarte con nosotros de Lunes a Viernes de 10:00am a 20:00pm.</p>
+                    <p>Sábados de 10:00am a 13:00pm</p>
+                    <br> 
+                    <h5><i class="bi bi-telephone"></i> +54 11 xxx-xxxxx</h5>
+                    <h5><i class="bi bi-envelope"></i> ridersedge@gmail.com</h5>
+                </div>        
+            </div>
+        
+            <!-- Formulario -->
+            <form class="formulario-mensaje">
+                <div class="form-adm p-4">
+                    <h1 id="titulo" class="text-center text-sm-start">Envianos un mensaje</h1>
+                    <label id="label" class="form-label mt-3 text-start w-100">Tu nombre</label>
+                    <input id="input" type="text" class="form-control mt-3" placeholder="Nombre">
+        
+                    <label id="label" class="form-label mt-3 text-start w-100">E-mail</label>
+                    <input id="input" type="text" class="form-control mt-3" placeholder="E-mail">
+                    
+                    <label id="label" class="form-label mt-3 text-start w-100">Mensaje</label>
+                    <textarea id="mensaje" class="form-control mt-3" rows="4" placeholder="Mensaje"></textarea>
+                    
+                    <button id="enviar" class="btn btn-primary w-100 mt-4">Enviar</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
 
-
-        <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3 mt-auto">
         <div class="container-fluid">
             <div class="row">
