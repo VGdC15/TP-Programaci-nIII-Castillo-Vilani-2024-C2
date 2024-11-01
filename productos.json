@@ -103,5 +103,21 @@
         "precio":"111111",
         "tipo":"casco",
         "estado":"activado"
+    },
+    {
+        "img":"MAC-181-BOWIE-LUCKY-PLATEADO.webp",
+        "marca":"Marca",
+        "modelo": "OF570 Verso Marker / Negro Mate",
+        "precio":"111111",
+        "tipo":"casco",
+        "estado":"activado"
+    },
+    {
+        "img":"LS2-Bolton-Mujer.webp",
+        "marca":"LS2",
+        "modelo": "Bolton Mujer",
+        "precio":"320000",
+        "tipo":"campera",
+        "estado":"activado"
     }
 ]
