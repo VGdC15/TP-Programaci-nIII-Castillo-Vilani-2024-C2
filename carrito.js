@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let total = 0;
 
-        // agrega productos al contenedor
+        // agrega productos  al contenedor
         productosCarrito.forEach(producto => {
             // Crea elementos para cada producto
             const productRow = document.createElement('div');
