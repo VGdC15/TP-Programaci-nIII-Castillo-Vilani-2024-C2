@@ -43,28 +43,41 @@ export default class Producto{
         let div = document.createElement("div");
         div.setAttribute("class","opciones");
         let btnAgregarCarrito = document.createElement("button");
-        btnAgregarCarrito.setAttribute("class","btn-agregar-carrito");
+        btnAgregarCarrito.setAttribute("class","btnAgregarCarrito");
         btnAgregarCarrito.textContent = "Añadir al carrito";
-        this.EscucharBtnAgregarProducto(btnAgregarCarrito,producto);
+        this.EscucharBtnAgregarCarrito(btnAgregarCarrito,producto);
         div.appendChild(btnAgregarCarrito);
         return div;
     }
 
-    static EscucharBtnAgregarProducto(btnAgregar, producto){
-        btnAgregar.addEventListener("click", () => {
-            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-            carrito.push(producto);
+    static EscucharBtnAgregarCarrito(button, producto) {
+        button.addEventListener("click", () => {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    
+            carrito.push({
+                img: producto.#img,
+                marca: producto.#marca,
+                modelo: producto.#modelo,
+                precio: producto.#precio,
+                tipo: producto.#tipo,
+                estado: producto.#estado,
+                descripcion: producto.#descripcion
+            });
+    
+            // Guarda el carrito actualizado en el LocalStorage
             localStorage.setItem("carrito", JSON.stringify(carrito));
             
-            alert("Producto agregado al carrito");
+            alert("Producto agregado al carrito.");
         });
 
-       /*  btnElemento.addEventListener("click",function(){     
+               /*  btnElemento.addEventListener("click",function(){     
             // Agregar al carrito 
         });
         */
     }
 
+
+    
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");
         imagen.setAttribute("class","img-producto");
@@ -87,3 +100,7 @@ export default class Producto{
         return div;
     }
 }
+
+
+    
+    
