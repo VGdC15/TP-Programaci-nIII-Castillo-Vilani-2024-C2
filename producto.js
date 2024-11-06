@@ -50,10 +50,19 @@ export default class Producto{
         return div;
     }
 
-    static EscucharBtnAgregarProducto(btnElemento, producto){
-        btnElemento.addEventListener("click",function(){     
+    static EscucharBtnAgregarProducto(btnAgregar, producto){
+        btnAgregar.addEventListener("click", () => {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            carrito.push(producto);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            
+            alert("Producto agregado al carrito");
+        });
+
+       /*  btnElemento.addEventListener("click",function(){     
             // Agregar al carrito 
         });
+        */
     }
 
     static CrearImagenHTML(url){        
