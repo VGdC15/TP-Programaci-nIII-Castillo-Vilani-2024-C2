@@ -1,3 +1,6 @@
+
+import Swal from "./node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
+
 export default class Producto{
     #img;
     #marca;
@@ -67,7 +70,7 @@ export default class Producto{
             // Guarda el carrito actualizado en el LocalStorage
             localStorage.setItem("carrito", JSON.stringify(carrito));
             
-            alert("Producto agregado al carrito.");
+            Swal.fire("Producto agregado al carrito");
         });
 
                /*  btnElemento.addEventListener("click",function(){     
