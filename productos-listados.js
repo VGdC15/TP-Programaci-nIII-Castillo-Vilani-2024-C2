@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 async function obtenerProductos(tipo=null,direccion=null){
     try{
         const data = await Producto.TraerProductos();
+        console.log(data);
         CargarProductos(indicePrimerProducto,data,direccion);
     }catch(error){
         console.error("Error:", error);
@@ -58,7 +59,7 @@ function CargarProductos(indiceInicial,data,direccion=null){
 }
 
 function CrearYUbicar(data,i){
-    let producto = new Producto(data[i]["img"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);
+    let producto = new Producto(data[i]["imagen"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);
     let elementoHTML = Producto.CrearElementoProductoGrilla(producto);
     document.getElementsByClassName("grid-productos")[0].appendChild(elementoHTML);
 }

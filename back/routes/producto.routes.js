@@ -3,7 +3,7 @@ const router = express.Router();
 const Producto = require("../model/producto.js");
 const ProductoSequelize = require("../entity/producto.entity.js");
 
-// localhost:3000/producto/
+// localhost:3000/productos/
 router.get("/", async (req, res) => {
   const resultado = await ProductoSequelize.findAll({
     where: { estado : true},
