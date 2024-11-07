@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.getElementsByClassName("btn-opcion-nav")[1].addEventListener("click",function(){
         obtenerProductos("campera");
     });
-    
     document.getElementById("pagina-anterior").addEventListener("click",function(){
         obtenerProductos("anterior");
     });
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 async function obtenerProductos(tipo=null,direccion=null){
     try{
         const data = await Producto.TraerProductos();
-        CargarProductos(indicePrimerProducto,data,tipo,direccion);
+        CargarProductos(indicePrimerProducto,data,direccion);
     }catch(error){
         console.error("Error:", error);
     }
@@ -44,7 +43,7 @@ function EstablecerIndiceInicial(indiceInicial,direccion){
     return indiceInicial;
 }
 
-//Poner filtro de tipo
+//Filtro de tipo
 function CargarProductos(indiceInicial,data,direccion=null){
     document.getElementsByClassName("grid-productos")[0].innerHTML = "";
     if(direccion){
