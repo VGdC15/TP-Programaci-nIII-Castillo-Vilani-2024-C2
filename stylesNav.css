@@ -218,6 +218,19 @@ nav {
     }
 }
 
+/* Contenedor para el mensaje de bienvenida */
+.bienvenida-container {
+    position: absolute;
+    top: 34%;
+    right: 2%; 
+    width: auto; 
+}
 
-
+/* Estilo del texto de bienvenida */
+#bienvenida-usuario {
+    color: rgba(94, 23, 235, 0.8); 
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: right;
+}
 
