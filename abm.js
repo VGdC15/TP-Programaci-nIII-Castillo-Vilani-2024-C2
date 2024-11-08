@@ -23,9 +23,10 @@ document.getElementById("btn-inicio-abm").addEventListener("click",function(){
 
 //Home >> Agregar
 document.getElementById("btn-agregar-nuevo").addEventListener("click",function(){
+    console.log("agrega");
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
     document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
-    document.getElementById("accion").appendChild(CrearFormAgregarProducto());
+    CargarFormulario();
     document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-agregar" }, "Agregar producto"));
 })
 
@@ -109,6 +110,18 @@ function CrearElemento(tipo,atributos={},texto="") {
     }
     return elemento;
 }
+
+async function CargarFormulario() {
+    try {
+      const response = await fetch('./form-agregar.html'); // Ruta al archivo HTML
+      if (!response.ok) throw new Error('Error al  el formulario');
+      const contenidoHTML = await response.text();
+      console.log(contenidoHTML);
+      document.getElementById('accion').innerHTML = contenidoHTML;
+    } catch (error) {
+      console.error("Error al cargar el formulario:", error);
+    }
+  }
 
 
 // function CrearPaginaModificar(producto){
