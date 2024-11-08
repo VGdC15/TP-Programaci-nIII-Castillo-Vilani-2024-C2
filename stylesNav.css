@@ -123,6 +123,7 @@ nav {
     justify-content:flex-end;
     align-items: center;
     margin-left: 10%;
+    margin-top: 2%;
 }
 
 .barra-busqueda form {
@@ -221,7 +222,7 @@ nav {
 /* Contenedor para el mensaje de bienvenida */
 .bienvenida-container {
     position: absolute;
-    top: 34%;
+    top: 37%;
     right: 2%; 
     width: auto; 
 }
