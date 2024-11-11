@@ -33,7 +33,6 @@ export default class Producto{
         }
     }
     
-
     static CrearElementoProductoGrilla(producto){
         let divProducto = document.createElement("div");
         divProducto.setAttribute("class","producto");
@@ -50,11 +49,12 @@ export default class Producto{
         let btnAgregarCarrito = document.createElement("button");
         btnAgregarCarrito.setAttribute("class","btnAgregarCarrito");
         btnAgregarCarrito.textContent = "Añadir al carrito";
-        this.EscucharBtnAgregarCarrito(btnAgregarCarrito,producto);
+        this.EscucharBtnAgregarCarrito(btnAgregarCarrito,producto.idproductos); 
         div.appendChild(btnAgregarCarrito);
         return div;
     }
 
+    /*
     static EscucharBtnAgregarCarrito(button, producto) {
         button.addEventListener("click", () => {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -74,15 +74,25 @@ export default class Producto{
             
             Swal.fire("Producto agregado al carrito");
         });
+    }
+    */
 
-               /*  btnElemento.addEventListener("click",function(){     
-            // Agregar al carrito 
+    static EscucharBtnAgregarCarrito(button, idproductos) {
+        button.addEventListener("click", () => {
+            if (idproductos != null) {
+                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+                
+                carrito.push(idproductos);
+
+                // Guarda el carrito actualizado en el LocalStorage
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                Swal.fire("Producto agregado al carrito");
+            } else {
+                console.error("Error: id del producto es nulo");
+            }
         });
-        */
     }
 
-
-    
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");
         imagen.setAttribute("class","img-producto");
