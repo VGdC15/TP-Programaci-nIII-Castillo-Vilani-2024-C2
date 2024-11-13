@@ -85,7 +85,7 @@ export default class Producto{
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");
         imagen.setAttribute("class","img-producto");
-        imagen.setAttribute("src","../imagenes/"+url);
+        imagen.setAttribute("src","/images/productos/"+url);
         return imagen;
     }
 
