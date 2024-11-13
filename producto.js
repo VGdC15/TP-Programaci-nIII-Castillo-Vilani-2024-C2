@@ -12,7 +12,6 @@ export default class Producto{
 
     constructor(img,marca,modelo,precio,tipo,estado,descripcion=null){
         this.#img = img;
-        console.log(this.#img);
         this.#marca = marca;
         this.#modelo = modelo;
         this.#precio = precio;
@@ -96,7 +95,7 @@ export default class Producto{
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");
         imagen.setAttribute("class","img-producto");
-        imagen.setAttribute("src","../imagenes/"+url);
+        imagen.setAttribute("src","./imagenes/"+url);
         return imagen;
     }
 

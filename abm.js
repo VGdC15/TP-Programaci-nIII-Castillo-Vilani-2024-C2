@@ -121,8 +121,18 @@ async function CargarFormulario() {
     } catch (error) {
       console.error("Error al cargar el formulario:", error);
     }
-  }
+}
 
+async function Insertar(){
+    const pedido = await fetch("https//localhost:3000/productos",{
+        method:"POST",
+        body:{
+            marca:pelota,
+
+        }
+    });
+
+}
 
 // function CrearPaginaModificar(producto){
 //     let pantallaModificar = CrearElemento("div",{id:"pantalla-modificar"});
