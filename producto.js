@@ -33,6 +33,8 @@ export default class Producto{
     }
     
     static CrearElementoProductoGrilla(producto){
+        console.log("Creando elemento para:", producto.#modelo);
+        
         let divProducto = document.createElement("div");
         divProducto.setAttribute("class","producto");
         divProducto.appendChild(this.CrearOpcionesHTML(producto));
@@ -48,34 +50,47 @@ export default class Producto{
         let btnAgregarCarrito = document.createElement("button");
         btnAgregarCarrito.setAttribute("class","btnAgregarCarrito");
         btnAgregarCarrito.textContent = "Añadir al carrito";
-        this.EscucharBtnAgregarCarrito(btnAgregarCarrito,producto.idproductos); 
+        this.EscucharBtnAgregarCarrito(btnAgregarCarrito,producto); 
         div.appendChild(btnAgregarCarrito);
         return div;
     }
 
-    /*
+
     static EscucharBtnAgregarCarrito(button, producto) {
         button.addEventListener("click", () => {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     
-            carrito.push({
-                img: producto.#img,
-                marca: producto.#marca,
-                modelo: producto.#modelo,
-                precio: producto.#precio,
-                tipo: producto.#tipo,
-                estado: producto.#estado,
-                descripcion: producto.#descripcion
-            });
+            const productoExistente = carrito.some(p => p.modelo === producto.#modelo && p.marca === producto.#marca);
     
-            // Guarda el carrito actualizado en el LocalStorage
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            
-            Swal.fire("Producto agregado al carrito");
+            if (carrito.length === 0) {
+                carrito.push({
+                    img: producto.#img,
+                    marca: producto.#marca,
+                    modelo: producto.#modelo,
+                    precio: producto.#precio,
+                    tipo: producto.#tipo,
+                    estado: producto.#estado,
+                    descripcion: producto.#descripcion
+                });
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                Swal.fire("Producto agregado al carrito");
+
+            } else if (productoExistente) {
+                Swal.fire("Este producto ya está en tu carrito.");
+            }
         });
     }
-    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
+/*
     static EscucharBtnAgregarCarrito(button, idproductos) {
         button.addEventListener("click", () => {
             if (idproductos != null) {
@@ -91,6 +106,7 @@ export default class Producto{
             }
         });
     }
+*/
 
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");

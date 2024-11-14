@@ -60,8 +60,7 @@ function CargarProductos(indiceInicial,data,direccion=null){
 function CrearYUbicar(data,i){
     let producto = new Producto(data[i]["imagen"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);
     let elementoHTML = Producto.CrearElementoProductoGrilla(producto);
-    const idProducto = data[i].idproductos; 
     document.getElementsByClassName("grid-productos")[0].appendChild(elementoHTML);
     const botonAgregar = elementoHTML.querySelector(".btnAgregarCarrito");
-    Producto.EscucharBtnAgregarCarrito(botonAgregar, idProducto);
+    Producto.EscucharBtnAgregarCarrito(botonAgregar, producto);
 }

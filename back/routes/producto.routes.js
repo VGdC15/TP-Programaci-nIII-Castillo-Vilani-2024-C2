@@ -26,6 +26,23 @@ router.post("/insertar",(req,res)=>{
     res.send("Insertado");
 });
 
+// Ruta para obtener un producto por su ID
+router.get("/:id", async (req, res) => {
+  try {
+    const resultado = await ProductoSequelize.findOne({
+      where: { id: req.params.id, eliminado: false }
+    });
+    if (resultado) {
+      res.send(resultado);
+    } else {
+      res.status(404).send({ message: "Producto no encontrado" });
+    }
+  } catch (error) {
+    console.error("Error al buscar el producto", error);
+    res.status(500).send({ error: "Error al buscar el producto" });
+  }
+});
+
 async function Crear(rMarca,rModelo,rImagen,rPrecio,rTipo,rEstado,rDescripcion){
   try{
     const nuevoProducto = await ProductoSequelize.create({
@@ -41,6 +58,9 @@ async function Crear(rMarca,rModelo,rImagen,rPrecio,rTipo,rEstado,rDescripcion){
       console.error("Error al insertar el producto", error);
   }
 }
+
+
+
 
 // router.post("/", (req, res) => {
 //   // Tomar los datos del body
