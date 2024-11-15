@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const router = express.Router();
 const ProductoSequelize = require("../entity/producto.entity.js");
 
@@ -10,10 +11,16 @@ router.get("/", async (req, res) => {
   res.send(resultado);
 });
 
+
+// Como mierda voy a otra pagina desde aca ? 
+// Esto no funciona
+// router.get("/carrito",async(req,res,next)=>{
+//   res.sendFile(path.join(__dirname, '../views', 'carrito.html'));
+// });
+
 router.get("/todos",async (req,res,next)=>{
-  console.log("aca");
   res.render('productos-listados');
-})
+});
 
 router.post("/insertar",(req,res)=>{
     const marca = req.body.marca;
