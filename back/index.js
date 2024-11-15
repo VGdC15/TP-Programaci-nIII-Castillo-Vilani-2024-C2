@@ -2,6 +2,12 @@ const express = require("express");
 require("dotenv").config(); // Cargar variables de entorno al inicio
 const app = express();
 
+//Configuro ejs para html
+app.set('view engine', 'ejs');
+
+//Configurar los archivos estaticos
+app.use(express.static('public'));
+//-------------------------------------------------------
 // Deshabilitar cors
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -10,9 +16,9 @@ app.use((req, res, next) => {
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
   next();
 });
+//-------------------------------------------------------
 
 // Importante para variables de entorno
 //require("dotenv").config();

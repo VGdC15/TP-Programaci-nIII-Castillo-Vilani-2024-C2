@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Producto = require("../model/producto.js");
 const ProductoSequelize = require("../entity/producto.entity.js");
 
 // localhost:3000/productos/
@@ -11,6 +10,10 @@ router.get("/", async (req, res) => {
   res.send(resultado);
 });
 
+router.get("/todos",async (req,res,next)=>{
+  console.log("aca");
+  res.render('productos-listados');
+})
 
 router.post("/insertar",(req,res)=>{
     const marca = req.body.marca;
@@ -27,21 +30,21 @@ router.post("/insertar",(req,res)=>{
 });
 
 // Ruta para obtener un producto por su ID
-router.get("/:id", async (req, res) => {
-  try {
-    const resultado = await ProductoSequelize.findOne({
-      where: { id: req.params.id, eliminado: false }
-    });
-    if (resultado) {
-      res.send(resultado);
-    } else {
-      res.status(404).send({ message: "Producto no encontrado" });
-    }
-  } catch (error) {
-    console.error("Error al buscar el producto", error);
-    res.status(500).send({ error: "Error al buscar el producto" });
-  }
-});
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const resultado = await ProductoSequelize.findOne({
+//       where: { id: req.params.id, eliminado: false }
+//     });
+//     if (resultado) {
+//       res.send(resultado);
+//     } else {
+//       res.status(404).send({ message: "Producto no encontrado" });
+//     }
+//   } catch (error) {
+//     console.error("Error al buscar el producto", error);
+//     res.status(500).send({ error: "Error al buscar el producto" });
+//   }
+// });
 
 async function Crear(rMarca,rModelo,rImagen,rPrecio,rTipo,rEstado,rDescripcion){
   try{
