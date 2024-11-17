@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MFavicon.svg" type="image/svg+xml">
+    <title>Producto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesVilani.css" type="text/css"/>
+    <link rel="stylesheet" href="stylesNav.css" type="text/css"/>
+    <script type="module" src="producto.js"></script>
+    <script type="module" src="nav.js"></script>
+
+</head>
+<body>
+  <nav>
+    <div class="zocalo-superior">
+        <div id="carousel-zocalo" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <p>Aceptamos todas las tarjetas</p>
+                </div>
+                <div class="carousel-item">
+                    <p>Envío gratis en compras superiores a $40.000</p>
+                </div>
+                <div class="carousel-item">
+                    <p>Entregas en el día para CABA y GBA</p>
+                </div>
+            </div>
+        </div>
+        <a href="/loginAdm.html" class="link-ingresar">Ingresar</a>
+    </div>
+
+    <div class="main-nav">
+        <div class="logo-nav">
+            <img src="imagenes\aio8hSr - Imgur.png" alt="Logo">
+        </div>
+
+
+        <!-- Menú de navegación regular -->
+        <div class="accesos">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Productos
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item btn-opcion-nav">Cascos</a></li>
+                    <li><a class="dropdown-item btn-opcion-nav">Camperas</a></li>
+                </ul>
+            </div>
+            <a href="contacto.html" id="contacto" class="btn-contacto" href="">Contacto</a>
+        </div>
+
+        <!-- Menú hamburguesa para pantallas pequeñas -->
+        <div class="menu-hamburguesa">
+            <button class="navbar-toggler" type="button" data-bs-toggle="dropdown" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="bi bi-list"></i>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Productos</a></li>
+                <li><a class="dropdown-item">Contacto</a></li>
+            </ul>
+        </div>
+
+        <!-- Bienvenida para el usuario -->
+        <div class="bienvenida-container">
+            <div id="bienvenida-usuario" class="text-end mb-2"></div>
+        </div>
+
+        <div class="barra-busqueda">
+            <form class="d-flex" role="search">
+                <div class="input-group">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Búsqueda</button>
+                </div>
+            </form>
+            <a href="carrito.html" class="btn btn-carrito">
+              <i class="bi bi-cart3"></i>
+            </a>
+        </div>
+    </div>
+  </nav>
+
+    <main class="main-producto">
+        <div id="fotos-producto">
+            <div id="carousel-producto" class="carousel slide">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>  
+              <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="imagenes/LS2-902-mate.png" class="d-block w-100" alt="helmet LS2 902">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="imagenes/LS2-902-mate2.png" class="d-block w-100" alt="helmet LS2 902">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="imagenes/LS2-902-mate3.png" class="d-block w-100" alt="helmet LS2 902">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-producto" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-producto" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        <div id="descripcion-simple">
+            <h2>LS2 902 SCOPE NEGRO MATE</h2>
+            <p id="precio">$430.000</p>
+            <div id="seleccion-talle">
+              <div id="talles">
+                <p>Seleccioná el talle:</p>
+                <button class="btn-talle">XS</button>
+                <button class="btn-talle">S</button>
+                <button class="btn-talle">M</button>
+                <button class="btn-talle">L</button>
+                <button class="btn-talle">XL</button>
+              </div>
+              <div>
+                <button id="btn-tabla-talles">Tabla de talles</button>
+              </div>
+            </div>
+            <div class="compra">
+              <button id="BtnAgregarCarrito">AGREGAR AL CARRITO</button>
+              <button>Calcular envio</button>
+            </div>
+        </div>
+    </main>
+    <section class="descripcion-completa">
+        <div class="descripcion">
+          <h3>Descripcion</h3>
+          <h4>Casco Rebatible 902 Scope de LS2</h4>
+          <p>Este casco modular brinda una combinación perfecta de protección y comodidad. Fabricado en termoplástico de alta calidad (HPTT), su diseño versátil con visor solar integrado se adapta a diversas condiciones de luz. Experimenta una conducción excepcional donde la versatilidad y la seguridad se encuentran en perfecta armonía.</p>
+          <h5>¿Qué lo hace único?</h5>
+          <p>Características Generales
+            Peso: GR 1650 ± 50
+            Certificación ECE 22.05
+            Material HPTT
+            3 Calotas
+            Rebatible 90°
+            Estilo Urbano / Touring
+            Seguridad
+            Correa de liberación rápida (micrométrica)
+            Hebilla de acero
+            Correa reforzada
+            Extracción de emergencia
+            Adhesivos reflectivos
+            EPS Multi Densidad
+            Cuello de Seguridad
+            Ventilación
+            Ventilación superior
+            Ventilación frontal
+            Puertos de salida
+            Visor
+            Visor Doble / Simple & Solar
+            Visor de rápida extracción
+            Antirrasguños
+            Protección UV
+            Antiniebla
+            Preparado para Pinlock
+            Interior
+            Extraíble y lavable
+            Transpirable
+            Hipoalergénico
+            Espuma cortada con láser
+            Forro extra confort
+            Mentonera</p>
+        </div>
+        <div class="ficha-tecnica">
+          <h3>Ficha Tecnica</h3>
+          <div class="caracteristica-valor">
+            <p class="caracteristica">Color:</p>
+            <p class="valor-caracteristica">Negro</p>
+          </div>
+          <div class="caracteristica-valor">
+            <p class="caracteristica">Temporada:</p>
+            <p class="valor-caracteristica">4 estaciones</p>
+          </div>
+          <div class="caracteristica-valor">
+            <p class="caracteristica">Tipo de material:</p>
+            <p class="valor-caracteristica">Hptt</p>
+          </div>
+          <div class="caracteristica-valor">
+            <p class="caracteristica">Uso:</p>
+            <p class="valor-caracteristica">Urbano</p>
+          </div>
+          <div class="caracteristica-valor">
+            <p class="caracteristica">Genero:</p>
+            <p class="valor-caracteristica">Unisex</p>
+          </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-12">
+                  Terms | Privacy | Security | Status | Docs | Manage cookies | Do not share personal information
+              </div>
+          </div>
+      </div>
+  </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+</html>

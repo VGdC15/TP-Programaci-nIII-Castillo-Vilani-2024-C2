@@ -19,7 +19,12 @@ router.get("/", async (req, res) => {
 // });
 
 router.get("/todos",async (req,res,next)=>{
-  res.render('productos-listados');
+  const resultado = await ProductoSequelize.findAll({
+    where: { estado : true},
+    raw: true
+  });
+  console.log(resultado);
+  res.render('productos-listados',{productos:resultado});
 });
 
 router.post("/insertar",(req,res)=>{
