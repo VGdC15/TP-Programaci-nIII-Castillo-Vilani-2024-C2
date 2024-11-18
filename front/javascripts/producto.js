@@ -59,10 +59,10 @@ export default class Producto{
     static EscucharBtnAgregarCarrito(button, producto) {
         button.addEventListener("click", () => {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    
-            const productoExistente = carrito.some(p => p.modelo === producto.#modelo && p.marca === producto.#marca);
-    
-            if (carrito.length === 0) {
+
+            const existeProducto = carrito.some(item => item.modelo === producto.#modelo);
+
+            if (!existeProducto) {
                 carrito.push({
                     img: producto.#img,
                     marca: producto.#marca,
@@ -72,41 +72,13 @@ export default class Producto{
                     estado: producto.#estado,
                     descripcion: producto.#descripcion
                 });
+
                 localStorage.setItem("carrito", JSON.stringify(carrito));
                 Swal.fire("Producto agregado al carrito");
-
-            } else if (productoExistente) {
-                Swal.fire("Este producto ya está en tu carrito.");
-            }
+            } 
         });
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
-/*
-    static EscucharBtnAgregarCarrito(button, idproductos) {
-        button.addEventListener("click", () => {
-            if (idproductos != null) {
-                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                
-                carrito.push(idproductos);
-
-                // Guarda el carrito actualizado en el LocalStorage
-                localStorage.setItem("carrito", JSON.stringify(carrito));
-                Swal.fire("Producto agregado al carrito");
-            } else {
-                console.error("Error: id del producto es nulo");
-            }
-        });
-    }
-*/
 
     static CrearImagenHTML(url){        
         let imagen = document.createElement("img");
