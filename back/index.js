@@ -1,12 +1,19 @@
 const express = require("express");
 require("dotenv").config(); // Cargar variables de entorno al inicio
 const app = express();
+const path = require("path");
+
+//multer
+const multer = require("multer");
+const upload = multer({dest:"uploads/"});
 
 //Configuro ejs para html
 app.set('view engine', 'ejs');
 
 //Configurar los archivos estaticos
 app.use(express.static('public'));
+// app.use(express.static(path.join(__dirname, 'public')));
+
 //-------------------------------------------------------
 // Deshabilitar cors
 app.use((req, res, next) => {
@@ -34,7 +41,9 @@ const productoSequelize = require("./entity/producto.entity.js");
 
 // Inicio rutas
 const productoRoutes = require("./routes/producto.routes.js");
+const adminRoutes = require("./routes/admin.routes.js");
 app.use("/productos", productoRoutes);
+app.use("/admin", adminRoutes);
 // Fin rutas
 
 

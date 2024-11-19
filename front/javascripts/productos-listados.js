@@ -1,4 +1,5 @@
 import Producto from "./producto.js";
+import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
 let indicePrimerProducto = 0;
 
@@ -25,6 +26,7 @@ async function obtenerTodosLosProductos(){
         const response = await fetch("http://localhost:3000/productos/todos");
         const resultado = await response.text();
         document.getElementsByClassName("grid-productos")[0].innerHTML = resultado;
+        EscucharBtnAgregarCarrito();
     }catch(error){
         console.error("Error al traer los datos:", error);
         throw error;
@@ -52,6 +54,33 @@ function EstablecerIndiceInicial(indiceInicial,direccion){
         indiceInicial = 0;
     }
     return indiceInicial;
+}
+
+function EscucharBtnAgregarCarrito(){
+    let productos = document.getElementsByClassName("producto");
+    let botones = document.getElementsByClassName("BtnAgregarCarrito");
+
+    for(let i=0;i<productos.length;i++){
+        botones[i].addEventListener("click", () => {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const existeProducto = carrito.some(item => item.modelo === productos[i].getAttribute("data-modelo"));
+        
+            if (!existeProducto) {
+                carrito.push({
+                    img: productos[i].getAttribute("data-imagen"),
+                    marca: productos[i].getAttribute("data-marca"),
+                    modelo: productos[i].getAttribute("data-modelo"),
+                    precio: Number(productos[i].getAttribute("data-precio")),
+                    tipo: productos[i].getAttribute("data-tipo"),
+                    estado: productos[i].getAttribute("data-estado"),
+                    descripcion: productos[i].getAttribute("data-descripcion")
+                });
+        
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                Swal.fire("Producto agregado al carrito");
+            } 
+        });
+    }
 }
 
 //Filtro de tipo

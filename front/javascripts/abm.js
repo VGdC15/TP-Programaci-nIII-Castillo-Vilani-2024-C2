@@ -23,28 +23,23 @@ document.getElementById("btn-inicio-abm").addEventListener("click",function(){
 
 //Home >> Agregar
 document.getElementById("btn-agregar-nuevo").addEventListener("click",function(){
-    console.log("agrega");
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
-    document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
-    CargarFormulario();
-    document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-agregar" }, "Agregar producto"));
+    InsertarFormNuevoProducto();
 })
-
 
 
 //Home >> Modificar
 document.getElementById("btn-modificar-producto").addEventListener("click",function(){
-    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
-    document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
-    let div = document.createElement("div");
-    div.setAttribute("class","grid-productos");
-    document.getElementById("accion").appendChild(div);
+    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden" 
+    // ObtenerTodosLosProductos();
+    CargarProductosAsync();
+    // document.getElementById("accion").appendChild(div);
 
 
     //  Revisar los botones!!!!!
-    CrearBotones();
+    // CrearBotones();
     
-    obtenerProductos();
+    // obtenerProductos();
     
     // TraerData();
 })
@@ -116,7 +111,6 @@ async function CargarFormulario() {
       const response = await fetch('./form-agregar.html'); // Ruta al archivo HTML
       if (!response.ok) throw new Error('Error al  el formulario');
       const contenidoHTML = await response.text();
-      console.log(contenidoHTML);
       document.getElementById('accion').innerHTML = contenidoHTML;
     } catch (error) {
       console.error("Error al cargar el formulario:", error);
@@ -131,8 +125,64 @@ async function Insertar(){
 
         }
     });
-
 }
+
+
+async function InsertarFormNuevoProducto(){
+    const response = await fetch("http://localhost:3000/admin/nuevo-producto");
+    const form = await response.text();
+    document.getElementsByClassName("main-abm")[0].innerHTML = form;
+}
+
+async function InsertarFormModProducto(idProducto){
+    const response = await fetch("http://localhost:3000/admin/modificar-producto",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id:idProducto}),
+      });
+    const form = await response.text();
+    document.getElementsByClassName("main-abm")[0].innerHTML = form;
+}
+
+
+
+async function ObtenerTodosLosProductos(){
+    try{
+        const response = await fetch("http://localhost:3000/admin/productos/todos");
+        const resultado = await response.text();
+        let divAccion = CrearElemento("div",{id:"accion"});
+        let divGrid = document.createElement("div");
+        divGrid.setAttribute("class","grid-productos");
+        divGrid.innerHTML = resultado;
+        divAccion.appendChild(divGrid);
+        document.getElementsByClassName("main-abm")[0].appendChild(divAccion);        
+    }catch(error){
+        console.error("Error al traer los datos:", error);
+        throw error;
+    }
+}
+
+
+function EscucharBtnModProducto(){
+    let productos = document.getElementsByClassName("producto");
+    let botonesMod = document.getElementsByClassName("btn-modificar");
+    let botonesAct = document.getElementsByClassName("btn-activar");
+
+    for(let i=0;i<productos.length;i++){
+        botonesMod[i].addEventListener("click", () => {
+            InsertarFormModProducto(productos[i].getAttribute("data-id"));
+        });
+    }
+}
+
+async function CargarProductosAsync(){
+    await ObtenerTodosLosProductos();
+    EscucharBtnModProducto();
+}
+
+
 
 // function CrearPaginaModificar(producto){
 //     let pantallaModificar = CrearElemento("div",{id:"pantalla-modificar"});

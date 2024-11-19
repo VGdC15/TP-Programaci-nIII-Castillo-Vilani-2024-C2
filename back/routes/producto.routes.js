@@ -23,7 +23,6 @@ router.get("/todos",async (req,res,next)=>{
     where: { estado : true},
     raw: true
   });
-  console.log(resultado);
   res.render('productos-listados',{productos:resultado});
 });
 
