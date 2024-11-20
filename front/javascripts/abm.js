@@ -134,29 +134,35 @@ async function InsertarFormNuevoProducto(){
     const form = await response.text();
     document.getElementById("accion").style.visibility = "visible";
     document.getElementById("accion").innerHTML = form;
-
-    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append("imagen",event.target.imagen);
-
-        //Ahora hay que hacer la peticion
-        //Lo deje en el minuto 44
-
-        const producto = {
-            marca: event.target.marca.value,
-            modelo: event.target.modelo.value,
-            precio: event.target.precio.value,
-            tipo: event.target.tipo.value,
-            descripcion: event.target.descripcion.value,
-        };
-        InsertarNuevoProducto(producto);
-        event.target.reset();
-    });
+    
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",EscucharBtnForm);
 }
 
-async function SubirImagenProducto(){
+async function EscucharBtnForm(event){
+    event.preventDefault();
+        
+    //Enviar imagen
+    const formData = new FormData();
+    const imagen = document.getElementById("input-agregar-imagenes").files[0];
+    formData.append("imagen",imagen); 
+    const resultado = await fetch("http://localhost:3000/admin/carga",{
+            method:"POST",
+            body:formData
+    });
 
+    //CargarProducto
+    const ruta = await resultado.json();
+    const producto = {
+        marca: event.target.marca.value,
+        modelo: event.target.modelo.value,
+        precio: event.target.precio.value,
+        tipo: event.target.tipo.value,
+        imagen: ruta.ruta,
+        descripcion: event.target.descripcion.value,
+    };
+
+    InsertarNuevoProducto(producto);
+    event.target.reset();
 }
 
 async function InsertarFormModProducto(idProducto){

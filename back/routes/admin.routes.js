@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
       callback(new Error("No es una imagen"));
     }else{
       const nombre = file.originalname + "-" + Date.now() + "." + extension; 
+      req.savedFileName = nombre;
       callback(null,nombre);
     }
   },
@@ -53,14 +54,12 @@ router.get("/productos/todos", async (req, res) => {
 
 router.post("/nuevo-producto",async (req,res)=>{
   const producto = req.body;
-  console.log(producto);
   CrearProducto(producto);
 });
 
 
 router.post("/carga",upload.single("imagen"),(req,res)=>{
-  console.log("carga imagen");
-  res.send();
+  res.send({ruta:req.savedFileName});
 });
 
 //Esta funcion no va aca me parece 
@@ -70,7 +69,7 @@ async function CrearProducto(producto) {
       marca: producto.marca,
       modelo: producto.modelo,
       precio: producto.precio,
-      imagen: "rutaImagen", // Hay que guardar la imagen primero y despues pasar la ruta
+      imagen: producto.imagen, // Hay que guardar la imagen primero y despues pasar la ruta
       tipo: producto.tipo,
       descripcion: producto.descripcion
     });
