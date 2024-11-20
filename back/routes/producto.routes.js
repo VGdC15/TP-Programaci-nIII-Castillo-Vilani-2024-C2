@@ -12,12 +12,6 @@ router.get("/", async (req, res) => {
 });
 
 
-// Como mierda voy a otra pagina desde aca ? 
-// Esto no funciona
-// router.get("/carrito",async(req,res,next)=>{
-//   res.sendFile(path.join(__dirname, '../views', 'carrito.html'));
-// });
-
 router.get("/todos",async (req,res,next)=>{
   const resultado = await ProductoSequelize.findAll({
     where: { estado : true},

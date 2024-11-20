@@ -3,13 +3,33 @@ const path = require('path');
 const router = express.Router();
 const ProductoSequelize = require("../entity/producto.entity.js");
 
+const multer = require("multer");
+const { error } = require("console");
+const storage = multer.diskStorage({
+  filename: (req,file,callback)=>{
+    const mimetype = file.mimetype;
+    const [tipo,extension] = mimetype.split("/");
+    if(tipo!=="image"){
+      callback(new Error("No es una imagen"));
+    }else{
+      const nombre = file.originalname + "-" + Date.now() + "." + extension; 
+      callback(null,nombre);
+    }
+  },
+  destination:(req,file,callback)=>{
+    callback(null,"public/images/productos/");
+  }
+});
+const upload = multer({storage:storage});
+
 // localhost:3000/admin/
 router.get("/nuevo-producto", async (req, res) => {
-  res.render("form-nuevo-producto");
+  res.render("form-producto",{producto: {}});
 });
 
 
 router.post("/modificar-producto", async (req, res) => {
+  console.log(req.body.id);
     const { id } = req.body;
     if (!id) {
       return res.status(400).json({ message: 'Id incorrecto' });
@@ -20,15 +40,43 @@ router.post("/modificar-producto", async (req, res) => {
         return res.status(404).json({ message: 'Producto no encontrado' });
     }
 
-    res.render("form-nuevo-producto",{producto:producto});
+    res.render("form-producto",{producto:producto});
 });
 
 router.get("/productos/todos", async (req, res) => {
     const resultado = await ProductoSequelize.findAll({
-    where: { estado : true},
     raw: true
     });
     res.render("productos-listados-admin",{productos:resultado});
 });
 
+
+router.post("/nuevo-producto",async (req,res)=>{
+  const producto = req.body;
+  console.log(producto);
+  CrearProducto(producto);
+});
+
+
+router.post("/carga",upload.single("imagen"),(req,res)=>{
+  console.log("carga imagen");
+  res.send();
+});
+
+//Esta funcion no va aca me parece 
+async function CrearProducto(producto) {
+  try {
+    const nuevoProducto = await ProductoSequelize.create({
+      marca: producto.marca,
+      modelo: producto.modelo,
+      precio: producto.precio,
+      imagen: "rutaImagen", // Hay que guardar la imagen primero y despues pasar la ruta
+      tipo: producto.tipo,
+      descripcion: producto.descripcion
+    });
+    console.log('Producto creado:', nuevoProducto.toJSON());
+  } catch (error) {
+    console.error('Error al crear producto:', error);
+  }
+}
 module.exports = router;

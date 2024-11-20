@@ -17,7 +17,8 @@ import Producto from "./producto.js";
 
 //Boton INICIO
 document.getElementById("btn-inicio-abm").addEventListener("click",function(){
-    document.getElementById("accion").remove();
+    document.getElementById("accion").innerHTML = "";
+    document.getElementById("accion").style.visibility = "hidden";
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "visible";
 })
 
@@ -131,7 +132,31 @@ async function Insertar(){
 async function InsertarFormNuevoProducto(){
     const response = await fetch("http://localhost:3000/admin/nuevo-producto");
     const form = await response.text();
-    document.getElementsByClassName("main-abm")[0].innerHTML = form;
+    document.getElementById("accion").style.visibility = "visible";
+    document.getElementById("accion").innerHTML = form;
+
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("imagen",event.target.imagen);
+
+        //Ahora hay que hacer la peticion
+        //Lo deje en el minuto 44
+
+        const producto = {
+            marca: event.target.marca.value,
+            modelo: event.target.modelo.value,
+            precio: event.target.precio.value,
+            tipo: event.target.tipo.value,
+            descripcion: event.target.descripcion.value,
+        };
+        InsertarNuevoProducto(producto);
+        event.target.reset();
+    });
+}
+
+async function SubirImagenProducto(){
+
 }
 
 async function InsertarFormModProducto(idProducto){
@@ -143,7 +168,18 @@ async function InsertarFormModProducto(idProducto){
         body: JSON.stringify({id:idProducto}),
       });
     const form = await response.text();
-    document.getElementsByClassName("main-abm")[0].innerHTML = form;
+    document.getElementById("accion").style.visibility = "visible";
+    document.getElementById("accion").innerHTML = form;
+}
+
+async function InsertarNuevoProducto(producto){
+    const response = await fetch("http://localhost:3000/admin/nuevo-producto",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,imagen:producto.imagen,descripcion:producto.descripcion,}),
+    });
 }
 
 
@@ -152,12 +188,11 @@ async function ObtenerTodosLosProductos(){
     try{
         const response = await fetch("http://localhost:3000/admin/productos/todos");
         const resultado = await response.text();
-        let divAccion = CrearElemento("div",{id:"accion"});
         let divGrid = document.createElement("div");
         divGrid.setAttribute("class","grid-productos");
         divGrid.innerHTML = resultado;
-        divAccion.appendChild(divGrid);
-        document.getElementsByClassName("main-abm")[0].appendChild(divAccion);        
+        document.getElementById("accion").appendChild(divGrid);
+        document.getElementById("accion").style.visibility = "visible";       
     }catch(error){
         console.error("Error al traer los datos:", error);
         throw error;
@@ -171,6 +206,9 @@ function EscucharBtnModProducto(){
     let botonesAct = document.getElementsByClassName("btn-activar");
 
     for(let i=0;i<productos.length;i++){
+        botonesAct[i].addEventListener("click",()=>{
+            //Pedir al servidor que cambie el estado
+        });
         botonesMod[i].addEventListener("click", () => {
             InsertarFormModProducto(productos[i].getAttribute("data-id"));
         });

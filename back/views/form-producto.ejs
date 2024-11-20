@@ -1,0 +1,34 @@
+
+    <form class="form-agregar-producto">
+        <div id="div-inputs-texto">
+            <div class="div-input">
+                <label for="input-agregar-marca">Marca:</label>
+                <input id="input-agregar-marca" name="marca" value="<%= producto ? producto.marca || '' : '' %>">
+            </div>
+            <div class="div-input">
+                <label for="input-agregar-modelo">Modelo:</label>
+                <input id="input-agregar-modelo" name="modelo" value="<%= producto ? producto.modelo || '' : '' %>">
+            </div>
+            <div class="div-input">
+                <label for="input-agregar-precio">Precio:</label>
+                <input id="input-agregar-precio" name="precio" value="<%= producto ? producto.precio || '' : '' %>">
+            </div>
+            <div class="div-input">
+                <label for="input-agregar-tipo">Tipo:</label>
+                <input id="input-agregar-tipo" name="tipo" value="<%= producto ? producto.tipo || '' : '' %>">
+            </div>
+            <div id="div-descripcion">
+                <label for="input-agregar-descripcion">Descripcion</label>
+                <textarea id="input-agregar-descripcion" name="descripcion" rows="4" cols="50">
+                    <%= producto ? producto.descripcion || '' : '' %>
+                </textarea>
+            </div>
+        </div>
+        <div id="div-imagenes-boton">
+            <div class="div-imagenes">
+                <label for="input-agregar-imagenes">Imágenes:</label>
+                <input type="file" id="input-agregar-imagenes" name="imagen" accept="image/*">
+            </div>
+            <button type="submit" id="btn-agregar">!Listo!</button>
+        </div>
+    </form>

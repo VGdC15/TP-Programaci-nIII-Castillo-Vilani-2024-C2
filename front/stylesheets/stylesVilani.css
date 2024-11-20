@@ -475,6 +475,7 @@
 }
 
 #accion{
+    visibility: hidden;
     position:relative;
     display: flex;
     justify-content: center;

@@ -3,10 +3,6 @@ require("dotenv").config(); // Cargar variables de entorno al inicio
 const app = express();
 const path = require("path");
 
-//multer
-const multer = require("multer");
-const upload = multer({dest:"uploads/"});
-
 //Configuro ejs para html
 app.set('view engine', 'ejs');
 
