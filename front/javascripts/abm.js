@@ -217,7 +217,9 @@ async function InsertarNuevoProducto(producto){
     });
 }
 
-
+async function LimpiarDivAccion(){
+    document.getElementById("accion").innerHTML = "";
+}
 
 async function ObtenerTodosLosProductos(){
     try{
@@ -241,16 +243,37 @@ function EscucharBtnModProducto(){
     let botonesAct = document.getElementsByClassName("btn-activar");
 
     for(let i=0;i<productos.length;i++){
-        botonesAct[i].addEventListener("click",()=>{
-            //Pedir al servidor que cambie el estado
+
+        botonesAct[i].addEventListener("click",async()=>{
+            EscucharBtnEstado(productos[i]);
         });
+
         botonesMod[i].addEventListener("click", () => {
             InsertarFormModProducto(productos[i].getAttribute("data-id"));
         });
     }
 }
 
+
+async function EscucharBtnEstado(producto){
+    const resultado = await fetch("http://localhost:3000/admin/cambiar-estado",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id:producto.getAttribute("data-id"),
+            estado:producto.getAttribute("data-estado")  
+        })
+    });
+    if(resultado.status === 200){
+        CargarProductosAsync();
+    }
+}
+
+
 async function CargarProductosAsync(){
+    await LimpiarDivAccion();
     await ObtenerTodosLosProductos();
     EscucharBtnModProducto();
 }

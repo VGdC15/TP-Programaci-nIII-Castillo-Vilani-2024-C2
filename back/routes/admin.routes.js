@@ -46,6 +46,7 @@ router.post("/modificar-producto", async (req, res) => {
 });
 
 
+//Modificar un producto
 router.post("/modificar",async (req,res)=>{
   const productoFront = req.body;
   console.log(productoFront);
@@ -54,15 +55,20 @@ router.post("/modificar",async (req,res)=>{
 });
 
 
-async function ActualizarDatosProducto(id,productoActualizado) {
-  await ProductoSequelize.update({ 
-    marca: productoActualizado.marca, 
-    modelo: productoActualizado.modelo, 
-    precio: productoActualizado.precio, 
-    tipo: productoActualizado.tipo, 
-    descripcion: productoActualizado.descripcion
-  }, { where: { idProductos:id },});
-}
+//Activar / Desactivar
+router.post("/cambiar-estado",async (req,res)=>{
+  const body = req.body;
+  if(body.estado == 0){
+    await ProductoSequelize.update({ 
+      estado: 1
+    }, { where: { idProductos: body.id },});
+  }else if(body.estado == 1){
+    await ProductoSequelize.update({ 
+      estado: 0
+    }, { where: { idProductos: body.id },});
+  }
+  res.status(200).json({ mensaje: 'El estado del producto ha si modificado' });
+})
 
 
 
@@ -70,7 +76,7 @@ async function ActualizarDatosProducto(id,productoActualizado) {
 router.get("/productos/todos", async (req, res) => {
     const resultado = await ProductoSequelize.findAll({
     raw: true
-    });
+  });
     res.render("productos-listados-admin",{productos:resultado});
 });
 
@@ -107,6 +113,15 @@ async function CrearProducto(producto) {
 }
 
 
+async function ActualizarDatosProducto(id,productoActualizado) {
+  await ProductoSequelize.update({ 
+    marca: productoActualizado.marca, 
+    modelo: productoActualizado.modelo, 
+    precio: productoActualizado.precio, 
+    tipo: productoActualizado.tipo, 
+    descripcion: productoActualizado.descripcion
+  }, { where: { idProductos:id },});
+}
 
 
 
