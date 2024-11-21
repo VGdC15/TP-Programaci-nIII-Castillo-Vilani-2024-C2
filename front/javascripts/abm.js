@@ -130,15 +130,15 @@ async function Insertar(){
 
 
 async function InsertarFormNuevoProducto(){
-    const response = await fetch("http://localhost:3000/admin/nuevo-producto");
+    const response = await fetch("http://localhost:3000/admin/form-producto");
     const form = await response.text();
     document.getElementById("accion").style.visibility = "visible";
     document.getElementById("accion").innerHTML = form;
     
-    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",EscucharBtnForm);
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",EscucharBtnFormNuevo);
 }
 
-async function EscucharBtnForm(event){
+async function EscucharBtnFormNuevo(event){
     event.preventDefault();
         
     //Enviar imagen
@@ -165,6 +165,7 @@ async function EscucharBtnForm(event){
     event.target.reset();
 }
 
+
 async function InsertarFormModProducto(idProducto){
     const response = await fetch("http://localhost:3000/admin/modificar-producto",{
         method: 'POST',
@@ -176,6 +177,34 @@ async function InsertarFormModProducto(idProducto){
     const form = await response.text();
     document.getElementById("accion").style.visibility = "visible";
     document.getElementById("accion").innerHTML = form;
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
+        EscuhcarBtnFormMod(event,idProducto);
+    });
+}
+
+
+async function EscuhcarBtnFormMod(event,id){
+    event.preventDefault();
+    const producto = {
+        id:id,
+        marca: event.target.marca.value,
+        modelo: event.target.modelo.value,
+        precio: event.target.precio.value,
+        tipo: event.target.tipo.value,
+        descripcion: event.target.descripcion.value,
+    };
+    EnviarProductoActualizado(producto);
+    event.target.reset();
+}
+
+async function EnviarProductoActualizado(producto){
+    const response = await fetch("http://localhost:3000/admin/modificar",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
+    });
 }
 
 async function InsertarNuevoProducto(producto){

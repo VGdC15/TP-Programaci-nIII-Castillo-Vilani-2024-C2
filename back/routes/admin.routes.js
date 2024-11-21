@@ -23,14 +23,15 @@ const storage = multer.diskStorage({
 });
 const upload = multer({storage:storage});
 
-// localhost:3000/admin/
-router.get("/nuevo-producto", async (req, res) => {
+
+//Menu agregar producto
+router.get("/form-producto", async (req, res) => {
   res.render("form-producto",{producto: {}});
 });
 
 
+//Menu modificar producto
 router.post("/modificar-producto", async (req, res) => {
-  console.log(req.body.id);
     const { id } = req.body;
     if (!id) {
       return res.status(400).json({ message: 'Id incorrecto' });
@@ -44,6 +45,28 @@ router.post("/modificar-producto", async (req, res) => {
     res.render("form-producto",{producto:producto});
 });
 
+
+router.post("/modificar",async (req,res)=>{
+  const productoFront = req.body;
+  console.log(productoFront);
+  await ActualizarDatosProducto(productoFront.id,productoFront);
+  res.send("Producto modificado");
+});
+
+
+async function ActualizarDatosProducto(id,productoActualizado) {
+  await ProductoSequelize.update({ 
+    marca: productoActualizado.marca, 
+    modelo: productoActualizado.modelo, 
+    precio: productoActualizado.precio, 
+    tipo: productoActualizado.tipo, 
+    descripcion: productoActualizado.descripcion
+  }, { where: { idProductos:id },});
+}
+
+
+
+//Listar todos los productos
 router.get("/productos/todos", async (req, res) => {
     const resultado = await ProductoSequelize.findAll({
     raw: true
@@ -52,15 +75,19 @@ router.get("/productos/todos", async (req, res) => {
 });
 
 
+//Crear nuevo producto
 router.post("/nuevo-producto",async (req,res)=>{
   const producto = req.body;
   CrearProducto(producto);
 });
 
-
+//Subir imagen de producto
 router.post("/carga",upload.single("imagen"),(req,res)=>{
   res.send({ruta:req.savedFileName});
 });
+
+
+
 
 //Esta funcion no va aca me parece 
 async function CrearProducto(producto) {
@@ -78,4 +105,9 @@ async function CrearProducto(producto) {
     console.error('Error al crear producto:', error);
   }
 }
+
+
+
+
+
 module.exports = router;
