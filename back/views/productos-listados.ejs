@@ -1,11 +1,10 @@
 <% productos.forEach(producto => { %>
-    <div class="producto">
+    <div class="producto" data-id=<%= producto.idproductos %> data-marca=<%= producto.marca %> data-modelo=<%= producto.modelo %> data-imagen=<%= producto.imagen %> data-precio=<%= producto.precio %> data-tipo=<%= producto.tipo %> data-estado=<%= producto.estado %> data-descripcion=<%= producto.descripcion %>>
         <div class="opciones">
-            <!-- ESCUCHAR BOTON -->
             <button class="BtnAgregarCarrito">Añadir al carrito</button> 
         </div>
-        <img  class="img-producto" src="../../back/public/images/productos/<%= producto.imagen %>" alt="producto">
-        <p><%= producto.titulo %></p>
+        <img class="img-producto" src="../../back/public/images/productos/<%= producto.imagen %>" alt="producto">
+        <p><%= producto.marca %> <%= producto.modelo %></p>
         <div class="precio">
             <p><%= producto.precio %></p>
         </div>

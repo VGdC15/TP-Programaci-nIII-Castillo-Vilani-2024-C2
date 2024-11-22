@@ -1,0 +1,17 @@
+<% productos.forEach(producto => { %>
+    <div class="producto" data-id=<%= producto.idproductos %> data-marca=<%= producto.marca %> data-modelo=<%= producto.modelo %> data-imagen=<%= producto.imagen %> data-precio=<%= producto.precio %> data-tipo=<%= producto.tipo %> data-estado=<%= producto.estado %> data-descripcion=<%= producto.descripcion %>>
+        <div class="opciones">
+            <button class="btn-modificar">Modificar</button>
+            <% if (producto.estado === 0) { %>
+                <button class="btn-activar">Activar</button> 
+                <% } else { %>
+                    <button class="btn-activar">Desactivar</button>
+              <% } %> 
+        </div>
+        <img class="img-producto" src="../../back/public/images/productos/<%= producto.imagen %>" alt="producto">
+        <p><%= producto.marca %> <%= producto.modelo %></p>
+        <div class="precio">
+            <p><%= producto.precio %></p>
+        </div>
+    </div>
+<% }) %>

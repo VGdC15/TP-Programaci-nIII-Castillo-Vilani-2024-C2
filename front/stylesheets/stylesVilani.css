@@ -400,7 +400,7 @@
     width: 100%;
     min-height: 85vh;
     height: fit-content;
-    background-image: url('./imagenes/africa-twin-byn-apagada.png');
+    background-image: url('../images/africa-twin-byn-apagada.png');
     background-size: cover;
     background-position: center; 
     background-repeat: no-repeat;
@@ -475,6 +475,7 @@
 }
 
 #accion{
+    visibility: hidden;
     position:relative;
     display: flex;
     justify-content: center;

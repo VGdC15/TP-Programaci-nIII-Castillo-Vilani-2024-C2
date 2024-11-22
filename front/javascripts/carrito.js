@@ -1,4 +1,4 @@
-import Swal from "./node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
+import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
 const carritoContainer = document.getElementById('carrito');
 const totalPriceElement = document.getElementById('total-price');
@@ -23,7 +23,7 @@ function cargarProductosCarrito() {
         productRow.classList.add('cart-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-3');
 
         productRow.innerHTML = `
-            <img src="./imagenes/${producto.img}" alt="${producto.nombre}" class="img-fluid" style="width: 50px; height: 50px; margin-right: 10px;">
+            <img src="../../back/public/images/productos/${producto.img}" alt="${producto.nombre}" class="img-fluid" style="width: 50px; height: 50px; margin-right: 10px;">
             <span>${producto.marca} ${producto.modelo}</span>
             <span>$${producto.precio.toFixed(2)}</span>
             <div class="d-flex align-items-center">

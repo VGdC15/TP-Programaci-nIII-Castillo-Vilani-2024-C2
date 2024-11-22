@@ -1,74 +1,31 @@
 import Producto from "./producto.js";
-// El panel de administrador debe mostrar los productos disponibles con sus detalles, separados por tipo.
-//(Listar todos los productos)
 
-// El panel debe poder permitir seleccionar un producto y:
-// Modificar el producto (nombre, precio, imagen).
-// Desactivar el producto (baja lógica → cambiar el valor de activo a false).
-// Reactivar el producto (cambiar el valor de activo a true).
-// El panel debe poder permitir agregar un nuevo producto a la base de datos. (activo por defecto).
-// El panel debe poseer un botón que permita descargar el listado de ventas en excel.
-
-
-//      Que falta?
-//  -Un cartel cuando agregas los productos
-//  -Advertencias cuando ingresas datos erroneos o vacios
+// Guardar el indice por el cual empezar a cargar en el localstorage
+// Traer solo la cantidad que yo quiera
+// El boton de anterior, resta la cantidad que yo muestro en la pagina hasta que alcance el cero
+// El boton de siguiente suma la cantidad siempre y cuando haya mas productos (Como lo hago sin que se queje la db?)
 
 
 //Boton INICIO
 document.getElementById("btn-inicio-abm").addEventListener("click",function(){
-    document.getElementById("accion").remove();
+    document.getElementById("accion").innerHTML = "";
+    document.getElementById("accion").style.visibility = "hidden";
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "visible";
 })
 
 //Home >> Agregar
 document.getElementById("btn-agregar-nuevo").addEventListener("click",function(){
-    console.log("agrega");
     document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
-    document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
-    CargarFormulario();
-    document.getElementById("div-imagenes-boton").appendChild(CrearElemento("button", { id: "btn-agregar" }, "Agregar producto"));
+    InsertarFormNuevoProducto();
 })
-
 
 
 //Home >> Modificar
 document.getElementById("btn-modificar-producto").addEventListener("click",function(){
-    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
-    document.getElementsByClassName("main-abm")[0].appendChild(CrearElemento("div",{id:"accion"}));
-    let div = document.createElement("div");
-    div.setAttribute("class","grid-productos");
-    document.getElementById("accion").appendChild(div);
-
-
-    //  Revisar los botones!!!!!
-    CrearBotones();
-    
-    obtenerProductos();
-    
-    // TraerData();
+    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden" 
+    CargarProductosAsync();
 })
 
-function CrearBotones(){
-    let div = document.createElement("div");
-    div.setAttribute("class","selector-paginas");
-    let btnAnterior = document.createElement("button");
-    let btnSiguiente = document.createElement("button")
-    btnAnterior.setAttribute("id","pagina-anterior");
-    btnSiguiente.setAttribute("id","pagina-siguiente");
-    div.appendChild(btnAnterior);
-    div.appendChild(btnSiguiente);
-    document.getElementById("accion").appendChild(div);
-}
-
-async function obtenerProductos(indicePrimerProducto=0,direccion=null){
-    try{
-        const data = await Producto.TraerProductos();
-        CargarProductos(indicePrimerProducto,data,direccion);
-    }catch(error){
-        console.error("Error:", error);
-    }
-}
 
 function EstablecerIndiceInicial(indiceInicial,direccion){
     if(direccion === "anterior"){
@@ -100,40 +57,200 @@ function CargarProductos(indiceInicial,data,direccion=null){
 }
 
 
-function CrearElemento(tipo,atributos={},texto="") {
-    let elemento = document.createElement(tipo);
-    for (let clave in atributos) {
-        elemento.setAttribute(clave, atributos[clave]);
-    }
-    if (texto) {
-        elemento.textContent = texto;
-    }
-    return elemento;
+
+
+async function InsertarFormNuevoProducto(){
+    const response = await fetch("http://localhost:3000/admin/form-producto");
+    const form = await response.text();
+    document.getElementById("accion").style.visibility = "visible";
+    document.getElementById("accion").innerHTML = form;
+    
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",EscucharBtnFormNuevo);
 }
 
-async function CargarFormulario() {
-    try {
-      const response = await fetch('./form-agregar.html'); // Ruta al archivo HTML
-      if (!response.ok) throw new Error('Error al  el formulario');
-      const contenidoHTML = await response.text();
-      console.log(contenidoHTML);
-      document.getElementById('accion').innerHTML = contenidoHTML;
-    } catch (error) {
-      console.error("Error al cargar el formulario:", error);
-    }
-}
-
-async function Insertar(){
-    const pedido = await fetch("https//localhost:3000/productos",{
-        method:"POST",
-        body:{
-            marca:pelota,
-
-        }
+async function EscucharBtnFormNuevo(event){
+    event.preventDefault();
+    
+    //Enviar imagen
+    const formData = new FormData();
+    const imagen = document.getElementById("input-agregar-imagenes").files[0];
+    formData.append("imagen",imagen); 
+    const resultado = await fetch("http://localhost:3000/admin/carga",{
+            method:"POST",
+            body:formData
     });
-
+    
+    //CargarProducto
+    const ruta = await resultado.json();
+    const producto = {
+        marca: event.target.marca.value,
+        modelo: event.target.modelo.value,
+        precio: event.target.precio.value,
+        tipo: event.target.tipo.value,
+        imagen: ruta.ruta,
+        descripcion: event.target.descripcion.value,
+    };
+    
+    InsertarNuevoProducto(producto);
+    event.target.reset();
 }
 
+
+async function InsertarFormModProducto(idProducto){
+    const response = await fetch("http://localhost:3000/admin/modificar-producto",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id:idProducto}),
+    });
+    const form = await response.text();
+    document.getElementById("accion").style.visibility = "visible";
+    document.getElementById("accion").innerHTML = form;
+    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
+        EscuhcarBtnFormMod(event,idProducto);
+    });
+}
+
+
+async function EscuhcarBtnFormMod(event,id){
+    event.preventDefault();
+    const producto = {
+        id:id,
+        marca: event.target.marca.value,
+        modelo: event.target.modelo.value,
+        precio: event.target.precio.value,
+        tipo: event.target.tipo.value,
+        descripcion: event.target.descripcion.value,
+    };
+    EnviarProductoActualizado(producto);
+    event.target.reset();
+}
+
+async function EnviarProductoActualizado(producto){
+    const response = await fetch("http://localhost:3000/admin/modificar",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
+    });
+}
+
+async function InsertarNuevoProducto(producto){
+    const response = await fetch("http://localhost:3000/admin/nuevo-producto",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,imagen:producto.imagen,descripcion:producto.descripcion,}),
+    });
+}
+
+async function LimpiarDivAccion(){
+    document.getElementById("accion").innerHTML = "";
+}
+
+async function ObtenerTodosLosProductos(){
+    try{
+        const response = await fetch("http://localhost:3000/admin/productos/todos");
+        const resultado = await response.text();
+        let divGrid = document.createElement("div");
+        divGrid.setAttribute("class","grid-productos");
+        divGrid.innerHTML = resultado;
+        document.getElementById("accion").appendChild(divGrid);
+        document.getElementById("accion").style.visibility = "visible";       
+    }catch(error){
+        console.error("Error al traer los datos:", error);
+        throw error;
+    }
+}
+
+
+function EscucharBtnModProducto(){
+    let productos = document.getElementsByClassName("producto");
+    let botonesMod = document.getElementsByClassName("btn-modificar");
+    let botonesAct = document.getElementsByClassName("btn-activar");
+    
+    for(let i=0;i<productos.length;i++){
+        
+        botonesAct[i].addEventListener("click",async()=>{
+            EscucharBtnEstado(productos[i]);
+        });
+        
+        botonesMod[i].addEventListener("click", () => {
+            InsertarFormModProducto(productos[i].getAttribute("data-id"));
+        });
+    }
+}
+
+
+async function EscucharBtnEstado(producto){
+    const resultado = await fetch("http://localhost:3000/admin/cambiar-estado",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+          body: JSON.stringify({
+            id:producto.getAttribute("data-id"),
+            estado:producto.getAttribute("data-estado")  
+        })
+    });
+    if(resultado.status === 200){
+        CargarProductosAsync();
+    }
+}
+
+
+async function CargarProductosAsync(){
+    await LimpiarDivAccion();
+    await ObtenerTodosLosProductos();
+    EscucharBtnModProducto();
+}
+
+
+// function CrearElemento(tipo,atributos={},texto="") {
+//     let elemento = document.createElement(tipo);
+//     for (let clave in atributos) {
+//         elemento.setAttribute(clave, atributos[clave]);
+//     }
+//     if (texto) {
+//         elemento.textContent = texto;
+//     }
+//     return elemento;
+// }
+
+// async function CargarFormulario() {
+//     try {
+//       const response = await fetch('./form-agregar.html'); // Ruta al archivo HTML
+//       if (!response.ok) throw new Error('Error al  el formulario');
+//       const contenidoHTML = await response.text();
+//       document.getElementById('accion').innerHTML = contenidoHTML;
+//     } catch (error) {
+//       console.error("Error al cargar el formulario:", error);
+//     }
+// }
+
+// function CrearBotones(){
+//     let div = document.createElement("div");
+//     div.setAttribute("class","selector-paginas");
+//     let btnAnterior = document.createElement("button");
+//     let btnSiguiente = document.createElement("button")
+//     btnAnterior.setAttribute("id","pagina-anterior");
+//     btnSiguiente.setAttribute("id","pagina-siguiente");
+//     div.appendChild(btnAnterior);
+//     div.appendChild(btnSiguiente);
+//     document.getElementById("accion").appendChild(div);
+// }
+
+// async function obtenerProductos(indicePrimerProducto=0,direccion=null){
+//     try{
+//         const data = await Producto.TraerProductos();
+//         CargarProductos(indicePrimerProducto,data,direccion);
+//     }catch(error){
+//         console.error("Error:", error);
+//     }
+// }
 // function CrearPaginaModificar(producto){
 //     let pantallaModificar = CrearElemento("div",{id:"pantalla-modificar"});
 //     pantallaModificar.appendChild(CrearFormAgregarProducto(producto["marca"],producto["modelo"],producto["precio"],producto["descripcion"]));
