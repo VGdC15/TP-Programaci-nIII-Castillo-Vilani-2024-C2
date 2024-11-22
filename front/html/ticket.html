@@ -111,8 +111,14 @@
                         <p id="label" class="form-label mt-3 text-start w-100">Precio:</p>
                     </div>
 
-                    <h4 id="label" class="form-label mt-3 text-end w-100">Total: $50.000</h4>
-                    <h6 id="label" class="form-label mt-3 text-center w-100">¡Gracias por su compra!</h6>
+                    <div class="total">
+                        <button id="descargarPDF" onclick="guardar()">Descargar Ticket</button>
+                        <h4 id="precioTotal" class="form-label mt-3 text-end w-100">Total: $0.000</h4>
+                        
+                    </div>
+
+                    <h4 id="label" class="form-label mt-3 text-center w-100">¡Gracias por su compra!</h4>
+                    <a href="..\html\productos-listados.html" id="VolverHome" class="btn-contacto" href="">¿Querés seguir comprando?</a>
 
                 </div>
             </form>
