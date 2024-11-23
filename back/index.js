@@ -35,18 +35,19 @@ app.use(bodyParser.json());
 const sequelize = require("./db/sequelize.js");
 const productoSequelize = require("./entity/producto.entity.js");
 const relacionar = require("./entity/relaciones.js");
-relacionar();
+//relacionar();
 
 // Inicio rutas
 const productoRoutes = require("./routes/producto.routes.js");
 const adminRoutes = require("./routes/admin.routes.js");
 const ventasRoutes = require("./routes/ventas.routes.js");
+const ticketRoutes = require("./routes/ticket.routes.js");
 app.use("/productos", productoRoutes);
 app.use("/admin", adminRoutes);
 app.use("/ventas", ventasRoutes);
+app.use("/ticket", ticketRoutes);
+
 // Fin rutas
-
-
 app.get("/", async (req, res) => {
   conexion();
   res.send("listo");

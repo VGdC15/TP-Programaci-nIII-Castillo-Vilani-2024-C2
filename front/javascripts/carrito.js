@@ -1,7 +1,7 @@
 import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
 const carritoContainer = document.getElementById('carrito');
-const totalPriceElement = document.getElementById('total-price');
+const totalPriceElement = document.getElementById('totalPrice');
 const checkoutButton = document.getElementById('checkout-button');
 
 
@@ -117,7 +117,7 @@ function eliminarProducto(button) {
     });
 }
 
-
+/*
 function finalizarCompra() {
     Swal.fire({
         title: '¿Desea confirmar la compra?',
@@ -145,7 +145,67 @@ function finalizarCompra() {
         }
     });
 }
+*/
+document.addEventListener("DOMContentLoaded", () => {
+    // Asignar evento al botón
+    const checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", finalizarCompra);
+});
+
+async function finalizarCompra() {
+    const productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    if (productosCarrito.length === 0) {
+        Swal.fire('El carrito está vacío.', 'Agrega productos para continuar.', 'info');
+        return;
+    }
+
+    // Confirmación antes de proceder
+    const result = await Swal.fire({
+        title: '¿Desea confirmar la compra?',
+        text: 'Estás a un paso de finalizar la operación.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#ee7410',
+        cancelButtonColor: '#5E17EB',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+        // Envío de datos al servidor
+        const response = await fetch('http://localhost:3000/ticket/finalizar-compra', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productos: productosCarrito })
+        });
+
+        if (response.ok) {
+            const ticketUrl = await response.text(); // URL 
+            Swal.fire({
+                title: '¡Compra realizada!',
+                text: 'Redirigiendo al ticket de compra...',
+                icon: 'success',
+                confirmButtonColor: '#ee7410',
+                showConfirmButton: true
+            }).then(() => {
+                //window.location.href = 'ticket.html';
+                window.location.href = ticketUrl; // Redirige al ticket
+            });
+
+            localStorage.removeItem('carrito'); 
+            cargarProductosCarrito(); 
+        } else {
+            Swal.fire('Error', 'Hubo un problema al procesar tu compra.', 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire('Error', 'No se pudo conectar con el servidor. Intenta más tarde.', 'error');
+    }
+}
 
 
-checkoutButton.addEventListener('click', finalizarCompra);
+//checkoutButton.addEventListener('click', finalizarCompra);
 cargarProductosCarrito();
