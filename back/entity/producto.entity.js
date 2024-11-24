@@ -1,7 +1,7 @@
 const sequelize = require("../db/sequelize");
 const { DataTypes } = require("sequelize");
 
-const AutoSequelize = sequelize.define(
+const ProductoSequelize = sequelize.define(
   "Producto",
   {
     idproductos: {
@@ -44,4 +44,4 @@ const AutoSequelize = sequelize.define(
   }
 );
 
-module.exports = AutoSequelize;
+module.exports = ProductoSequelize;

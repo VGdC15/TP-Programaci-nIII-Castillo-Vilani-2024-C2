@@ -2,7 +2,7 @@ const sequelize = require("../db/sequelize");
 const { DataTypes } = require("sequelize");
 
 const VentaSequelize = sequelize.define(
-  "Ventas",
+  "Venta",
   {
     idVenta: {
       type: DataTypes.INTEGER,
@@ -13,6 +13,10 @@ const VentaSequelize = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false, // NOT NULL
     },
+    total:{
+      type: DataTypes.INTEGER,
+      allowNull:false
+    }
   },
   {
     timestamps: true,

@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 const sequelize = require("./db/sequelize.js");
 const productoSequelize = require("./entity/producto.entity.js");
 const relacionar = require("./entity/relaciones.js");
-relacionar();
+
 
 // Inicio rutas
 const productoRoutes = require("./routes/producto.routes.js");
@@ -46,21 +46,26 @@ app.use("/admin", adminRoutes);
 app.use("/ventas", ventasRoutes);
 // Fin rutas
 
+conexion();
 
 app.get("/", async (req, res) => {
-  conexion();
   res.send("listo");
 });
 
-async function conexion(){
-  try{
-    await sequelize.authenticate();
-    await productoSequelize.sync({ alter: true });
-  }catch(err){
-    console.error("all bad",err);
-  }
-}
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("App started");
 });
+
+
+async function conexion(){
+  try{
+    await sequelize.authenticate();
+    await relacionar();
+    await sequelize.sync({ alter: true });
+    console.log(VentaSequelize.associations);
+    console.log(productoSequelize.associations);
+  }catch(err){
+    console.error("Error al conectar",err);
+  }
+}
