@@ -23,4 +23,15 @@ const VentaSequelize = sequelize.define(
   }
 );
 
+VentaSequelize.beforeSave(async (venta) => {
+  const productos = await venta.getProductos();
+
+  const total = productos.reduce((sum, producto) => {
+    const cantidad = producto.ProductoVenta.cantidad || 1; 
+    return sum + producto.precio * cantidad;
+  }, 0);
+
+  venta.total = total;
+});
+
 module.exports = VentaSequelize;
