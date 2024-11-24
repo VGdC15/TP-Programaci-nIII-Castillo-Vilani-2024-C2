@@ -41,9 +41,11 @@ const relacionar = require("./entity/relaciones.js");
 const productoRoutes = require("./routes/producto.routes.js");
 const adminRoutes = require("./routes/admin.routes.js");
 const ventasRoutes = require("./routes/ventas.routes.js");
+const ticketRoutes = require("./routes/ticket.routes.js");
 app.use("/productos", productoRoutes);
 app.use("/admin", adminRoutes);
 app.use("/ventas", ventasRoutes);
+app.use("/ticket", ticketRoutes);
 // Fin rutas
 
 conexion();
@@ -63,8 +65,6 @@ async function conexion(){
     await sequelize.authenticate();
     await relacionar();
     await sequelize.sync({ alter: true });
-    console.log(VentaSequelize.associations);
-    console.log(productoSequelize.associations);
   }catch(err){
     console.error("Error al conectar",err);
   }
