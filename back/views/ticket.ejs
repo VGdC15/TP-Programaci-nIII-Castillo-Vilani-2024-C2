@@ -2,28 +2,28 @@
     <div class="form-adm p-4 mx-auto">
         <h1 id="titulo" class="text-center text-sm-start">Ticket de Compra</h1>
                      
-        <p id="label" class="form-label mt-3 text-start w-100">Nombre:<%=datos[0].nombre%></p>
+        <p id="label" class="form-label mt-3 text-start w-100">Nombre: <%=datos[0].nombre%></p>
 
         <div class="row">
             <div class="col-sm-6">
-                <p id="label" class="form-label mt-3 text-start w-100">Fecha:<%=datos[0].fecha%></p>
+                <p id="label" class="form-label mt-3 text-start w-100">Fecha: <%=datos[0].fecha%></p>
             </div>
             <div class="col-sm-6">
-                <p id="label" class="form-label mt-3 text-start w-100">Número de ticket:<%=datos[0].numeroTicket%></p>
+                <p id="label" class="form-label mt-3 text-start w-100">Número de ticket: <%=datos[0].numeroTicket%></p>
             </div>
         </div>
         
         <% datos[1].productos.forEach(producto => { %>
             <div class="caja-producto">
                 <p id="label" class="form-label mt-3 text-start w-100">Producto: <%=producto.modelo%></p>
-                <p id="label" class="form-label mt-3 text-start w-100">Cantidad: <%=producto.cantidad%></p>
-                <p id="label" class="form-label mt-3 text-start w-100">Precio:<%=producto.precio%></p>
+                <p id="label" class="form-label mt-3 text-start w-100">Cantidad: <%=producto.ProductoVenta.dataValues.cantidad%></p>
+                <p id="label" class="form-label mt-3 text-start w-100">Precio: <%=producto.precio%></p>
             </div>
         <% }) %>
 
         <div class="total">
             <button id="descargarPDF" onclick="guardar()">Descargar Ticket</button>
-            <h4 id="precioTotal" class="form-label mt-3 text-end w-100">Total: $<%=datos[0].totalPrice%></h4>
+            <h4 id="precioTotal" class="form-label mt-3 text-end w-100">Total: $<%=datos[0].total%></h4>
             
         </div>
 

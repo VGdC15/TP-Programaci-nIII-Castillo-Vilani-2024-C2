@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function finalizarCompra() {
     const productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const nombreUsuario = localStorage.getItem('username');
 
     if (productosCarrito.length === 0) {
         Swal.fire('El carrito está vacío.', 'Agrega productos para continuar.', 'info');
@@ -179,11 +180,16 @@ async function finalizarCompra() {
         const response = await fetch('http://localhost:3000/ticket/finalizar-compra', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productos: productosCarrito })
+            body: JSON.stringify({ 
+                nombreComprador:nombreUsuario,
+                productos: productosCarrito 
+            })
         });
 
         if (response.ok) {
-            const ticketUrl = await response.text(); // URL 
+            const data = await response.json()
+            localStorage.setItem('idVenta', data.idVenta);
+
             Swal.fire({
                 title: '¡Compra realizada!',
                 text: 'Redirigiendo al ticket de compra...',
@@ -191,8 +197,7 @@ async function finalizarCompra() {
                 confirmButtonColor: '#ee7410',
                 showConfirmButton: true
             }).then(() => {
-                //window.location.href = 'ticket.html';
-                window.location.href = ticketUrl; // Redirige al ticket
+                window.location.href = "ticket.html"; // Redirige al ticket
             });
 
             localStorage.removeItem('carrito'); 
