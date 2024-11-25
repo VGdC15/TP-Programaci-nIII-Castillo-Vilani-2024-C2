@@ -67,6 +67,7 @@ function EscucharBtnAgregarCarrito(){
         
             if (!existeProducto) {
                 carrito.push({
+                    id:productos[i].getAttribute("data-id"),
                     img: productos[i].getAttribute("data-imagen"),
                     marca: productos[i].getAttribute("data-marca"),
                     modelo: productos[i].getAttribute("data-modelo"),
