@@ -22,14 +22,19 @@ html, body {
     margin-bottom: 3%;
 }
 
-#Ingresar {
+#Ingresar, #Autocompletar{
     background-color: rgba(188, 179, 214, 0.2); 
     border: none;
     border-radius: 5px;
 }
 
-#Ingresar:hover {
+#Ingresar:hover, #Autocompletar:hover{
     background-color: #0a0a0a;
+}
+
+#botones {
+    display: flex;
+    gap: 2%;
 }
 
 #label {
@@ -39,7 +44,7 @@ html, body {
     margin-top: 1%;
 }
 
-#input {
+#password, #email {
     background-color: rgba(188, 179, 214, 0.2);
     margin-top: 1%;
 }

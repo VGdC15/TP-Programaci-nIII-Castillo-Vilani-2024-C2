@@ -20,8 +20,8 @@ html, body {
     margin-bottom: 8%;
 }
 
-#crearCuenta {
-    background-color: #5E17EB;
+#crearCuenta{
+    background-color: rgba(188, 179, 214, 0.2);
     border: none;
     border-radius: 5px;
 }
@@ -35,7 +35,7 @@ html, body {
     text-align: left; 
 }
 
-#input {
+#email, #password {
     background-color: rgba(188, 179, 214, 0.2);
 }
 
