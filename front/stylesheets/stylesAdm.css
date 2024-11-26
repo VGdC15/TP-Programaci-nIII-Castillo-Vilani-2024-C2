@@ -2,22 +2,18 @@ html, body {
     height: 100%; 
 }
 
-#formularios {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-}
 
 
+/* Formulario */
 .form-adm {
     background: rgba(94, 23, 235, 0.8);
     border-radius: 15px;
     box-shadow: 0px 0px 10px #5E17EB;
     text-align: center;
-    max-width: 500px;
-    width: 100%;
-    margin-right: 10%;
-    margin: 0;
+    max-width: 500px; 
+    width: 70%;
+    z-index: 2;
+
 }
 
 #titulo {
@@ -48,28 +44,9 @@ html, body {
     margin-top: 1%;
 }
 
-/* Control para pantallas grandes (mayores a 768px) */
-@media (min-width: 768px) {
-    #formularios {
-        display: display; 
-    }
+#registro {
+    margin-top: 10%;
+    color:#ffffff;
 }
 
 
-/* Control para pantallas pequeñas y medianas (menores a 768px) */
-@media (max-width: 767px) {
-    #formularios {
-        display: block; /* Los formularios se apilan uno encima del otro */
-    }
-
-    #formCrear {
-        display: block;
-    }
-
-    .form-adm {
-        display: block;
-        width: 100%; /* Los formularios ocupan el 100% del ancho */
-        margin-top: 20px;
-        margin-bottom: 20px; /* Agregar separación entre formularios */
-    }
-}

@@ -41,12 +41,14 @@ const productoRoutes = require("./routes/producto.routes.js");
 const adminRoutes = require("./routes/admin.routes.js");
 const ventasRoutes = require("./routes/ventas.routes.js");
 const ticketRoutes = require("./routes/ticket.routes.js");
-const loginRoutes = require("./routes/usuario.routes.js");
+const crearRoutes = require("./routes/crearUsuario.routes.js");
+const loginRoutes = require("./routes/crearUsuario.routes.js");
 
 app.use("/productos", productoRoutes);
 app.use("/admin", adminRoutes);
 app.use("/ventas", ventasRoutes);
 app.use("/ticket", ticketRoutes);
+app.use("/usuario", crearRoutes);
 app.use("/login", loginRoutes);
 
 // Fin rutas

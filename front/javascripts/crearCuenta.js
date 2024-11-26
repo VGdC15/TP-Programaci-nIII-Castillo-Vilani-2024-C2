@@ -1,17 +1,16 @@
 import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Asigna evento al botón
-    const ingresarBoton = document.getElementById("Ingresar");
-    ingresarBoton.addEventListener("click", ingresar);
+    // Asignar evento al botón
+    const crearBoton = document.getElementById("crearCuenta");
+    crearBoton.addEventListener("click", crear);
 });
 
-async function ingresar() {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+async function crear() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    // Valida si los campos están completos
+    // Validar si los campos están completos
     if (!email || !password) {
         Swal.fire({
             icon: 'warning',
@@ -22,8 +21,8 @@ async function ingresar() {
     }
 
     try {
-        //envío de datos al servidor
-        const response = await fetch('http://localhost:3000/usuario/login', {
+        // Enviar datos al servidor
+        const response = await fetch('http://localhost:3000/usuario/crearUsuario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -36,31 +35,23 @@ async function ingresar() {
             const result = await response.json();
             Swal.fire({
                 icon: 'success',
-                title: 'Ingreso exitoso',
+                title: 'Usuario creado exitosamente',
                 confirmButtonColor: '#ee7410',
-                showConfirmButton: true
+                showConfirmButton: true,
             }).then(() => {
-                window.location.href = "../html/abm-admin.html"; 
+                window.location.href = "../html/loginAdm.html"; 
             });
         } else {
+            const error = await response.json();
             Swal.fire({
                 icon: 'error',
-                title: 'Error de ingreso',
-                text: errorText,
+                title: 'Error al crear usuario',
+                text: error.error || 'No se pudo crear el usuario.',
             });
         }
 
     } catch (error) {
         console.error('Error:', error);
-        Swal.fire('Error', 'No se pudo conectar con el servidor. Intenta más tarde.', 'error');
+        Swal.fire('Error', 'Usuario ya registrado.', 'error');
     }
-       
 }
-
-
-
-
-
-
-
-

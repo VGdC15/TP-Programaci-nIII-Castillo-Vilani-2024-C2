@@ -11,7 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script type="module" src="../javascripts/nav.js"></script>
-    <!--<script type="module" src="../javascripts/usuario.js"></script>-->
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav>
@@ -89,41 +88,22 @@
         <!-- Imagen de fondo -->
         <img src="..\images\DZ4a1TI - Imgur.png" alt="Fondo" class="position-absolute w-100 h-100" style="object-fit: cover; z-index: 1;">
         
-        <div>
-
-
-        </div id="formularios">
-            <!-- Formulario Crear cuenta-->
-            <form id="formCrear" class="w-100 position-relative" style="z-index: 2;">
-                <div class="form-adm p-4 mx-auto">
-                    <h1 id="titulo" class="text-center text-sm-start">Crea tu cuenta</h1>
-                    
-                    <!-- Diseño responsive con breakpoints -->
-                    <label id="label" class="form-label mt-3 text-start w-100">E-mail</label>
-                    <input id="input" type="text" class="form-control mt-3" placeholder="E-mail">
-                    
-                    <label id="label" class="form-label mt-3 text-start w-100">Contraseña</label>
-                    <input id="input" type="text" class="form-control mt-3" placeholder="Contraseña">
-                    
-                    <button id="crearCuenta" class="btn btn-primary w-100 mt-4">Crear Cuenta</button>
-                </div>
-            </form>
-
-            <!-- Formulario Login -->
-            <form id="loginForm" class="w-100 position-relative" style="z-index: 2;">
-                <div class="form-adm p-4 mx-auto">
-                    <h1 id="titulo" class="text-center text-sm-start">Ingresá a tu cuenta</h1>
-                    
-                    <!-- Diseño responsive con breakpoints -->              
-                    <label id="label" class="form-label mt-3 text-start w-100">E-mail</label>
-                    <input type="email" id="email" class="form-control mt-3" placeholder="Ingresa tu email" required>
-                    
-                    <label id="label" class="form-label mt-3 text-start w-100">Contraseña</label>
-                    <input type="password" id="password" class="form-control mt-3" placeholder="Ingresa tu contraseña" required>
-                    
-                    <a id="Ingresar" class="btn btn-primary w-100 mt-4">Ingresar</a>
-                    
-                </div>
+        
+        <!-- Formulario -->
+        <form id="loginForm" class="w-100 position-relative" style="z-index: 2;">
+            <div class="form-adm p-4 mx-auto">
+                <h1 id="titulo" class="text-center text-sm-start">Ingresá a tu cuenta</h1>
+                
+                <!-- Diseño responsive con breakpoints -->              
+                <label id="label" class="form-label mt-3 text-start w-100">E-mail</label>
+                <input type="email" id="email" class="form-control mt-3" placeholder="Ingresa tu email" required>
+                
+                <label id="label" class="form-label mt-3 text-start w-100">Contraseña</label>
+                <input type="password" id="password" class="form-control mt-3" placeholder="Ingresa tu contraseña" required>
+                
+                <a id="Ingresar" class="btn btn-primary w-100 mt-4">Ingresar</a>
+                <a href="crearCuenta.html" id="registro">¿No tenés usuario? Registrate</a>
+            </div>
         </form>
     </div>
 
