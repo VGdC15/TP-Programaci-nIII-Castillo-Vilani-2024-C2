@@ -172,6 +172,7 @@ async function finalizarCompra() {
             });
 
             localStorage.removeItem('carrito'); 
+            localStorage.removeItem("idVenta");
             cargarProductosCarrito(); 
         } else {
             Swal.fire('Error', 'Hubo un problema al procesar tu compra.', 'error');
