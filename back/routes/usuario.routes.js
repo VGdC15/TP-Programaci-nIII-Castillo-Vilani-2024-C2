@@ -3,7 +3,7 @@ const router = express.Router();
 const UsuarioSequelize = require("../entity/usuario.entity.js"); 
   
 // Ruta para registrar usuarios
-router.post("/registro", async (req, res) => {
+router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     // Validación de datos

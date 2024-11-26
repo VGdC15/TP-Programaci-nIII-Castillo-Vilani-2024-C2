@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 
 // Conexión DB
 const sequelize = require("./db/sequelize.js");
-const productoSequelize = require("./entity/producto.entity.js");
 const relacionar = require("./entity/relaciones.js");
 
 
@@ -42,12 +41,15 @@ const productoRoutes = require("./routes/producto.routes.js");
 const adminRoutes = require("./routes/admin.routes.js");
 const ventasRoutes = require("./routes/ventas.routes.js");
 const ticketRoutes = require("./routes/ticket.routes.js");
+const loginRoutes = require("./routes/usuario.routes.js");
+
 app.use("/productos", productoRoutes);
 app.use("/admin", adminRoutes);
 app.use("/ventas", ventasRoutes);
 app.use("/ticket", ticketRoutes);
-// Fin rutas
+app.use("/login", loginRoutes);
 
+// Fin rutas
 conexion();
 
 app.get("/", async (req, res) => {

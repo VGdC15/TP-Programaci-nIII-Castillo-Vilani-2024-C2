@@ -117,35 +117,6 @@ function eliminarProducto(button) {
     });
 }
 
-/*
-function finalizarCompra() {
-    Swal.fire({
-        title: '¿Desea confirmar la compra?',
-        text: 'Estás a un paso de finalizar la operación.',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#ee7410',
-        cancelButtonColor: '#5E17EB',
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: '¡Compra realizada!',
-                text: 'Redirigiendo al ticket de compra...',
-                icon: 'success',
-                confirmButtonColor: '#ee7410',
-                showConfirmButton: true, 
-            }).then(() => {
-                window.location.href = 'ticket.html';
-            });
-
-            localStorage.removeItem('carrito');
-            cargarProductosCarrito(); 
-        }
-    });
-}
-*/
 document.addEventListener("DOMContentLoaded", () => {
     // Asignar evento al botón
     const checkoutButton = document.getElementById("checkout-button");
@@ -211,6 +182,4 @@ async function finalizarCompra() {
     }
 }
 
-
-//checkoutButton.addEventListener('click', finalizarCompra);
 cargarProductosCarrito();
