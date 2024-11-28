@@ -3,7 +3,6 @@ const path = require('path');
 const router = express.Router();
 const ProductoSequelize = require("../entity/producto.entity.js");
 const mw = require("../middlewares/admin-mw.js");
-// const mw=require("../middlewares/admin-mw.js");
 const multer = require("multer");
 const { error } = require("console");
 

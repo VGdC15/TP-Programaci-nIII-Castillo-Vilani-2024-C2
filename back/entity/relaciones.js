@@ -20,9 +20,5 @@ async function Relacionar(){
       producto.belongsToMany(venta, { through: ProductoVenta });
       venta.belongsToMany(producto, { through: ProductoVenta });
 }
-// async function Relacionar(){
-//     venta.belongsToMany(producto,{ through:"VentaProducto" });
-//     producto.belongsToMany(venta, { through: "VentaProducto" });
-// }
 
 module.exports = Relacionar;

@@ -1,20 +1,21 @@
 const express = require("express");
-const { request } = require("http");
-const app = express();
-const path = require("path");
-const { prependListener } = require("process");
 const router = require("./producto.routes");
 const Venta = require("../model/venta.js");
+const mw = require("../middlewares/ventas.mw.js");
 
 //Menu agregar producto
-router.post("/finalizar-compra", async (req, res) => {
-    //Creo la venta    
-    const idVenta = await Venta.InsertarVenta(req.body.nombreComprador,req.body.productos);
-    res.status(201).json({ idVenta: idVenta });
+router.post("/finalizar-compra",
+    mw.validarListaIds,
+    mw.validarNombreComprador,
+    async (req, res) => {    
+        const {nombreComprador,listaProductos} = req.body
+        const idVenta = await Venta.InsertarVenta(nombreComprador,listaProductos);
+        res.status(201).json({ idVenta: idVenta });
 });
 
-router.post("/mostrar-ticket",async(req,res)=>{
-    const infoVenta = await Venta.ConsultarVenta(req.body.idVenta);
+router.post("/mostrar-ticket",mw.validarId,async(req,res)=>{
+    const {idVenta} = req.body;
+    const infoVenta = await Venta.ConsultarVenta(idVenta);
     res.render("ticket",
         {datos:[
             {

@@ -1,7 +1,7 @@
 const validarId = (req, res, next) => {
     const { id } = req.body;
 
-    if (id === undefined || id === null) {
+    if (id === undefined || id === null || id === "") {
         return res.status(400).json({ error: "Id no ingresado" });
     }
     if (isNaN(id)) {
@@ -28,7 +28,7 @@ const validarInfoTexto = (req,res,next)=>{
 
 const validarPrecio = (req,res,next)=>{
     const {precio} = req.body;
-    if (precio === undefined || precio === null) {
+    if (precio === undefined || precio === null || precio === "") {
         return res.status(400).json({ error: "Precio no ingresado" });
     }
     if (isNaN(precio)) {
@@ -51,9 +51,19 @@ const validarEstado = (req,res,next)=>{
 }
 
 const validarTipo = (req,res,next)=>{
-    const {tipo} = req.body;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$/;
+    const { tipo } = req.body;
+    if (tipo === undefined || tipo === null || tipo === "") {
+        return res.status(400).json({ error: "Tipo no ingresado" });
+    }
+    if(typeof tipo !== "string"){
+        return res.status(400).json({error:"El tipo debe ser una palabra"});
+    }
+    if(!regex.test(tipo)){
+        return res.status(400).json({error:"El tipo debe ser una palabra"});
+    }
     if(tipo !== "casco" && tipo != "campera"){
-        return res.status(400).json({error:"El campo tipo debe ser casco o campera"});
+        return res.status(400).json({error:"El tipo debe ser casco o campera"});
     }
 
     next();

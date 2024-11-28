@@ -3,15 +3,11 @@ const router = express.Router();
 const UsuarioSequelize = require("../entity/usuario.entity.js"); 
 const { registro } = require("../encriptar/contrasenias.js");
 const { login } = require("../encriptar/contrasenias.js");
+const mw = require("../middlewares/usuario.mw.js");
 
 
-router.post("/crearUsuario", async (req, res) => {
+router.post("/crearUsuario",mw.validarContraseña,mw.validarEmail, async (req, res) => {
     const { email, password } = req.body;
-
-    // Validación de datos
-    if (!email || !password) {
-        return res.status(400).send("Faltan datos obligatorios.");
-    }
 
     try {
         // Genera iv y contraseña encriptada
@@ -33,12 +29,8 @@ router.post("/crearUsuario", async (req, res) => {
 
 
 // Ruta para ingresar usuarios
-router.post("/login", async (req, res) => {
+router.post("/login",mw.validarContraseña,mw.validarEmail, async (req, res) => {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).send("Faltan datos obligatorios.");
-    }
 
     try {
         const usuario = await UsuarioSequelize.findOne({ where: { email } });
