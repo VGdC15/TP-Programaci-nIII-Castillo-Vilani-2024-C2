@@ -26,6 +26,21 @@ document.getElementById("btn-modificar-producto").addEventListener("click",funct
     CargarProductosAsync();
 })
 
+// Asignar evento al botón de cierre
+document.addEventListener("click", function (event) {
+    if (event.target && event.target.id === "btn-cerrar-formulario") {
+        cerrarFormulario();
+    }
+});
+
+
+function cerrarFormulario() {
+    const formulario = document.querySelector('.form-agregar-producto');
+    if (formulario) {
+        formulario.style.display = 'none';
+    }
+    window.location.href = "./abm-admin.html";
+}
 
 function EstablecerIndiceInicial(indiceInicial,direccion){
     if(direccion === "anterior"){
@@ -231,6 +246,9 @@ async function CargarProductosAsync(){
     await ObtenerTodosLosProductos();
     EscucharBtnModProducto();
 }
+
+
+
 
 
 // function CrearElemento(tipo,atributos={},texto="") {

@@ -30,6 +30,23 @@
     padding: 20vh;
 } 
 
+.btn-cerrar {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    background: none;
+    border: none;
+    font-size: 280%;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.btn-cerrar:hover {
+    color: #ff7300;
+}
+
+
 .opciones-principales button{
     background-color: #000000;
        border: 1px solid white;
@@ -104,6 +121,9 @@
     align-items: center;
 }
 
+#btn-agregar:hover {
+    box-shadow: 0px 0px 10px #5E17EB;
+}
 
 #div-inputs-texto{
     display:flex;
