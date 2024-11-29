@@ -1,0 +1,135 @@
+/* ------------------ Producto ------------------ */
+.main-producto{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color:transparent;
+    width: 100vw;
+    height:100vh;
+}
+
+#fotos-producto{
+    flex-grow: 1.5;
+    height: 70vh;
+    max-width:55vw;
+    width: 30%;
+}       
+
+#carousel-producto{
+    height: 70vh;
+}
+
+#carousel-producto .carousel-item{
+    height: 70vh;
+}
+
+#carousel-producto .carousel-item img{
+    width:100%;
+    height: 100%;
+    object-fit:contain;
+}
+
+#carousel-producto .carousel-indicators button{
+    background-color: #460067;
+}
+
+#descripcion-simple{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 70vh;
+    justify-content: space-between;
+}
+
+#descripcion-simple h2{
+    margin-top: 20px;
+    margin-left:5px;
+    font-family:"Jost";
+    color: #460067;
+}
+
+#seleccion-talle{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#seleccion-talle p, #descripcion-simple p{
+    font-family: "Jost";
+    font-size: 1.3em;
+    margin-left: 5px;
+}
+
+#descripcion-simple #precio{
+    font-size: 1.9em;
+}
+
+.btn-talle, #btn-tabla-talles, .compra button{
+    border-radius: 20px;
+    border-style: hidden;
+    text-align: center;
+    color: #460067;
+    background-color: #e2e2e2;
+    font-family: "Jost";
+    font-size: 1.5em;
+    margin:5px;
+    min-width: 3vw;
+}
+
+#btn-tabla-talles{
+    margin-left: 30%;
+    width: 100%;
+}
+
+.compra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.compra button:nth-child(1){
+    width: 70%;
+    background-color: #47a3ff;
+}
+
+.compra button:nth-child(2){
+    width: 40%;
+}
+
+
+.descripcion-completa{
+    display: flex;
+    justify-content: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.descripcion{
+    padding: 1vw;
+    flex-grow: 1;
+    width: 50%;
+}
+
+.descripcion h3,h4,h5,p{
+    font-family:"Jost";
+}
+
+.ficha-tecnica{
+    padding:1vw;
+    flex-grow: 1;
+    width: 50%;
+}
+.caracteristica-valor{
+    display: flex;
+    align-content:end;
+    justify-content: space-between;
+    border-bottom: 1px solid #460067;
+}
+
+.caracteristica-valor p{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-family:"Jost";
+}

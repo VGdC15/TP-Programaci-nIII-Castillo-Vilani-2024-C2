@@ -124,26 +124,9 @@ nav {
     align-items: center;
     margin-left: 10%;
     margin-top: 2%;
+    gap:5%;
 }
 
-.barra-busqueda form {
-    width: 60%;
-    background-color: rgba(188, 179, 214, 0.2); 
-    border-radius: 5px; 
-    margin-right: 1vw;
-}
-
-.barra-busqueda .form-control {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-style: hidden;
-    background-color: rgba(188, 179, 214, 0.2); 
-    color: white;
-}
-
-.barra-busqueda .form-control:focus {
-    box-shadow: none;
-}
 
 /* Barra de búsqueda */
 .barra-busqueda .btn {
@@ -154,7 +137,7 @@ nav {
     border-style: hidden;
 }
 
-/* Efecto hover en el botón de la barra de búsqueda */
+/* Efecto hover en el botón */
 .barra-busqueda .btn:hover {
     background-color: rgba(94, 23, 235, 1); 
     box-shadow: 0px 0px 15px rgba(94, 23, 235, 1);
@@ -169,9 +152,6 @@ nav {
     margin-right: 4%;
 }
 
-.btn-carrito:hover {
-    color: white;
-}
 
 .link-ingresar {
     position: absolute;
@@ -179,7 +159,7 @@ nav {
     top: 15%;
     transform: translateY(-50%);
     text-decoration: none;
-    color: rgba(94, 23, 235, 0.8); 
+    color: rgba(150, 106, 238, 0.8); 
     font-weight: bold;
 }
 
@@ -229,7 +209,7 @@ nav {
 
 /* Estilo del texto de bienvenida */
 #bienvenida-usuario {
-    color: rgba(94, 23, 235, 0.8); 
+    color: rgba(147, 102, 236, 0.8); 
     font-size: 1rem;
     font-weight: bold;
     text-align: right;

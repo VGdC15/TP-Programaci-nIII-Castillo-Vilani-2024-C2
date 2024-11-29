@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
-    background-color: beige;
+    background-color: #222222; 
+    color: white;
 }
 
 h1 {
