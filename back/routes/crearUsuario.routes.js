@@ -8,11 +8,6 @@ const { login } = require("../encriptar/contrasenias.js");
 router.post("/crearUsuario", async (req, res) => {
     const { email, password } = req.body;
 
-    // Validación de datos
-    if (!email || !password) {
-        return res.status(400).send("Faltan datos obligatorios.");
-    }
-
     try {
         // Genera iv y contraseña encriptada
         const { iv, encriptado } = registro(password);
@@ -32,13 +27,9 @@ router.post("/crearUsuario", async (req, res) => {
 });
 
 
-// Ruta para ingresar usuarios
+//Ruta para ingresar usuarios
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).send("Faltan datos obligatorios.");
-    }
 
     try {
         const usuario = await UsuarioSequelize.findOne({ where: { email } });
@@ -61,6 +52,48 @@ router.post("/login", async (req, res) => {
     }
 });
 
+//ruta para autocompletar
+router.get("/autocompletar", async (req, res) => {
+    try {
+        const usuario = await UsuarioSequelize.findOne();
+
+        if (!usuario) {
+            return res.status(404).json({
+                success: false,
+                message: "No hay usuarios registrados.",
+            });
+        }
+
+        // Desencriptar contraseña
+        const passwordDesencriptada = login(
+            null,
+            usuario.iv,
+            usuario.passwordEncriptada
+        )
+            ? desencriptar(usuario.iv, usuario.passwordEncriptada)
+            : null;
+
+        if (!passwordDesencriptada) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo desencriptar la contraseña.",
+            });
+        }
+
+        // autocompletar
+        res.status(200).json({
+            success: true,
+            email: usuario.email,
+            password: passwordDesencriptada,
+        });
+    } catch (error) {
+        console.error("Error al autocompletar:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error al autocompletar los datos.",
+        });
+    }
+});
+
 
 module.exports = router;
-  

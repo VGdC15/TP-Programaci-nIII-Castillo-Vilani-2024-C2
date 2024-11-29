@@ -1,7 +1,6 @@
 const crypto = require("crypto");
 require("dotenv").config();
 
-const passwordDelUsuario = "123456";
 const claveSecretaDelServer = process.env.CLAVE_SECRETA;
 const algoritmo = "aes-256-cbc"; 
 
@@ -19,13 +18,11 @@ function encriptar(password) {
   return { iv, encriptado };
 }
 
-const ivGenerado = "f1f2f002c2509e5b25470fd1543f64a8";
-const passGenerada = "42e9658b87ceaf2e003a6590c481b382";
-
 function desencriptar(iv, passEncriptada) {
   const decifrador = crypto.createDecipheriv(
     algoritmo,
     claveSecretaDelServer,
+    Buffer.from(claveSecretaDelServer),
     Buffer.from(iv, "hex")
   );
 
@@ -33,6 +30,17 @@ function desencriptar(iv, passEncriptada) {
   decifrado += decifrador.final("utf8");
   return decifrado;
 }
+
+// const desencriptar = (passEncriptada, iv) => {
+//   const decipher = crypto.createDecipheriv(
+//       algoritmo,
+//       Buffer.from(claveSecretaDelServer),
+//       Buffer.from(iv, "hex")
+//   );
+//   let desencriptado = decipher.update(passEncriptada, "hex", "utf8");
+//   desencriptado += decipher.final("utf8");
+//   return desencriptado;
+// };
 
 function registro(pass) {
     return encriptar(pass);
@@ -59,4 +67,4 @@ const exito = login("12345678", iv, encriptado);
 
 console.log(exito);
 
-module.exports = { login, registro };
+module.exports = { login, registro, desencriptar };
