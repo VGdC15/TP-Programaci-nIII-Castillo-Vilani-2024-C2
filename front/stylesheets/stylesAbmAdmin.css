@@ -7,11 +7,16 @@
     width: 100%;
     min-height: 85vh;
     height: fit-content;
-    background-image: url('../images/africa-twin-byn-apagada.png');
     background-size: cover;
     background-position: center; 
     background-repeat: no-repeat;
 }
+
+body{
+    background-image: url('/back/public/images/fondoAdmin.jpg');
+    width: 100%;
+    height: 100%;
+} 
 
 
 #btn-inicio-abm{
@@ -271,11 +276,8 @@
     }
     .portada-listado-productos img{
         height:30vh;
-    }
-
-    body{
-        background-image: url('./imagenes/FONDO-chico.png');
-    }    
+    } 
+   
     .main-nav{
         flex-direction: column;
         justify-content: center;

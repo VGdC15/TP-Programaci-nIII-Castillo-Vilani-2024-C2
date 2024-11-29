@@ -9,10 +9,12 @@
     opacity: 2;
     position: fixed;
 }
-
+body{
+    background-image: url("/back/public/images/fondoIndex.jpg");
+}  
 /* Contenedor que agrupa logo y formulario */
 .contenedor-logo-form {
-    display: flex;
+    display: flex; 
     flex-direction: column;
     justify-content: center;
     align-items: center;

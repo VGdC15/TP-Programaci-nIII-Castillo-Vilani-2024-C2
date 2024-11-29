@@ -7,10 +7,16 @@
     align-items: center;
 }
 
-.portada-listado-productos{
-    height:45vh;
-    width:100vw;
+.portada-listado-productos {
+    height: 45vh;
+    width: 100vw;
+    background-image: url("/back/public/images/fondoProductos.jpg");
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
 }
+
+
 
 .portada-listado-productos img{
     height: 45vh;

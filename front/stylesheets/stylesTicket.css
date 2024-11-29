@@ -2,6 +2,10 @@ html, body {
     height: 100%; 
 }
 
+body{
+  background-image: url("/back/public/images/fondoCrear.jpg");
+} 
+
 /* Formulario */
 .form-adm {
     background: #5E17EB;

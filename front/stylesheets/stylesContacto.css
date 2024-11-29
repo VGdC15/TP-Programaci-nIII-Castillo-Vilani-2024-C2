@@ -5,14 +5,17 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background-image: url("/back/public/images/fondoCrear.jpg");
 }
+
+
 
 /* Contenedor principal para dividir las secciones */
 .contacto-contenedor {
     display: flex;
     justify-content: space-between;
     align-items: stretch; 
-    background-color: #000; 
+    background-color: #313131; 
     padding: 1%;
     margin: 4%;
 
