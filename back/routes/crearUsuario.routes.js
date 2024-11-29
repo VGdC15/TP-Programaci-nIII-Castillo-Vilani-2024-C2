@@ -3,9 +3,10 @@ const router = express.Router();
 const UsuarioSequelize = require("../entity/usuario.entity.js"); 
 const { registro } = require("../encriptar/contrasenias.js");
 const { login } = require("../encriptar/contrasenias.js");
+const mw = require("../middlewares/usuario.mw.js");
 
 
-router.post("/crearUsuario", async (req, res) => {
+router.post("/crearUsuario",mw.validarContraseña,mw.validarEmail, async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -27,7 +28,7 @@ router.post("/crearUsuario", async (req, res) => {
 });
 
 
-//Ruta para ingresar usuarios
+// Ruta para ingresar usuarios
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 

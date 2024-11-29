@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 async function obtenerTodosLosProductos(){
     try{
         const response = await fetch("http://localhost:3000/productos/todos");
+        if(response.status === 500){
+            Swal.fire("Error al conectarse con el servidor");
+        }
         const resultado = await response.text();
         document.getElementsByClassName("grid-productos")[0].innerHTML = resultado;
         EscucharBtnAgregarCarrito();

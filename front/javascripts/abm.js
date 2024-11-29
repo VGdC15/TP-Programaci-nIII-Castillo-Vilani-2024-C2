@@ -1,5 +1,5 @@
 import Producto from "./producto.js";
-
+import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 // Guardar el indice por el cual empezar a cargar en el localstorage
 // Traer solo la cantidad que yo quiera
 // El boton de anterior, resta la cantidad que yo muestro en la pagina hasta que alcance el cero
@@ -71,30 +71,38 @@ async function InsertarFormNuevoProducto(){
 async function EscucharBtnFormNuevo(event){
     event.preventDefault();
     
-    //Enviar imagen
+    // //Enviar imagen
+    const resultado = InsertarImagen();
+    if(resultado.ok){
+        //CargarProducto
+        const ruta = await resultado.json();
+        const producto = {
+            marca: event.target.marca.value,
+            modelo: event.target.modelo.value,
+            precio: event.target.precio.value,
+            tipo: event.target.tipo.value,
+            imagen: ruta.ruta,
+            descripcion: event.target.descripcion.value,
+        };
+        
+        const resultadoProducto = InsertarNuevoProducto(producto);
+    }else{
+        Swal.fire('Error', 'Error al cargar el producto.', 'error');
+    }
+
+}
+
+
+async function InsertarImagen(){
     const formData = new FormData();
     const imagen = document.getElementById("input-agregar-imagenes").files[0];
     formData.append("imagen",imagen); 
     const resultado = await fetch("http://localhost:3000/admin/carga",{
-            method:"POST",
-            body:formData
+        method:"POST",
+        body:formData
     });
-    
-    //CargarProducto
-    const ruta = await resultado.json();
-    const producto = {
-        marca: event.target.marca.value,
-        modelo: event.target.modelo.value,
-        precio: event.target.precio.value,
-        tipo: event.target.tipo.value,
-        imagen: ruta.ruta,
-        descripcion: event.target.descripcion.value,
-    };
-    
-    InsertarNuevoProducto(producto);
-    event.target.reset();
+    return resultado;
 }
-
 
 async function InsertarFormModProducto(idProducto){
     const response = await fetch("http://localhost:3000/admin/modificar-producto",{
@@ -104,12 +112,17 @@ async function InsertarFormModProducto(idProducto){
         },
         body: JSON.stringify({id:idProducto}),
     });
-    const form = await response.text();
-    document.getElementById("accion").style.visibility = "visible";
-    document.getElementById("accion").innerHTML = form;
-    document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
-        EscuhcarBtnFormMod(event,idProducto);
-    });
+    
+    if(response.ok){
+        const form = await response.text();
+        document.getElementById("accion").style.visibility = "visible";
+        document.getElementById("accion").innerHTML = form;
+        document.getElementsByClassName("form-agregar-producto")[0].addEventListener("submit",(event)=>{
+            EscuhcarBtnFormMod(event,idProducto);
+        });
+    }else{
+        Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
+    }
 }
 
 
@@ -135,6 +148,9 @@ async function EnviarProductoActualizado(producto){
         },
         body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
     });
+    if(!response.ok){
+        Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
+    }
 }
 
 async function InsertarNuevoProducto(producto){
@@ -145,6 +161,12 @@ async function InsertarNuevoProducto(producto){
         },
         body: JSON.stringify({marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,imagen:producto.imagen,descripcion:producto.descripcion,}),
     });
+    if(response.status !== 500 && response.status !== 400){
+        return true;
+    }else{
+        Swal.fire('Error', 'Error al insertar el producto', 'error');
+        return false;
+    }
 }
 
 async function LimpiarDivAccion(){
@@ -198,6 +220,8 @@ async function EscucharBtnEstado(producto){
     });
     if(resultado.status === 200){
         CargarProductosAsync();
+    }else if(!resultado.ok){
+        Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
     }
 }
 
