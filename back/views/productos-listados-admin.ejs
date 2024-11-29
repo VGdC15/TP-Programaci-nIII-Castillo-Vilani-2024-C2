@@ -1,4 +1,5 @@
 <% productos.forEach(producto => { %>
+    <button type="button" id="btn-cerrar-formulario" class="btn-cerrar">×</button>
     <div class="producto" data-id=<%= producto.idproductos %> data-marca=<%= producto.marca %> data-modelo=<%= producto.modelo %> data-imagen=<%= producto.imagen %> data-precio=<%= producto.precio %> data-tipo=<%= producto.tipo %> data-estado=<%= producto.estado %> data-descripcion=<%= producto.descripcion %>>
         <div class="opciones">
             <button class="btn-modificar">Modificar</button>
