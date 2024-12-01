@@ -15,13 +15,23 @@ const validarId = (req, res, next) => {
 };
 
 const validarInfoTexto = (req,res,next)=>{
-    const {marca,modelo,tipo,descripcion} = req.body;
-    const info =[marca,modelo,tipo,descripcion];
-    for(const campo of info){
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9]+$/;
+    const {marca,modelo,tipo} = req.body;
+    const info = [marca,modelo,tipo];
+    for(let campo of info){
+        console.log(campo);
         if(campo === undefined || campo === null || campo === ""){
+            console.log("vacio");
             return res.status(400).json({error: "Los campos no deben estar vacios"});
         }
-        //Que sea texto
+        if(typeof campo !== "string"){
+            console.log("no es string");
+            return res.status(400).json({error:"El nombre debe ser una palabra"});
+        }
+        if(!regex.test(campo)){
+            console.log("no es una palabra");
+            return res.status(400).json({error:"El nombre debe ser una palabra"});
+        }
     }
     next();
 }

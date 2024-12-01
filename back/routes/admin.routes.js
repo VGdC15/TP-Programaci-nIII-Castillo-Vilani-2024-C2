@@ -1,11 +1,8 @@
 const express = require("express");
-const path = require('path');
 const router = express.Router();
 const ProductoSequelize = require("../entity/producto.entity.js");
 const mw = require("../middlewares/admin-mw.js");
 const multer = require("multer");
-const { error } = require("console");
-
 
 
 //    \(º_º)/  MOVER  \(º_º)/
@@ -67,7 +64,7 @@ router.post("/modificar",
     const productoFront = req.body;
     try{
       await ActualizarDatosProducto(productoFront.id,productoFront);
-      res.send("Producto modificado");
+      res.status(200).send("Producto modificado");
     }catch(error){
       res.status(500).json({message:error.message});
     }

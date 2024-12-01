@@ -1,9 +1,4 @@
-import Producto from "./producto.js";
 import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
-// Guardar el indice por el cual empezar a cargar en el localstorage
-// Traer solo la cantidad que yo quiera
-// El boton de anterior, resta la cantidad que yo muestro en la pagina hasta que alcance el cero
-// El boton de siguiente suma la cantidad siempre y cuando haya mas productos (Como lo hago sin que se queje la db?)
 
 
 //Boton INICIO
@@ -41,36 +36,6 @@ function cerrarFormulario() {
     }
     window.location.href = "./abm-admin.html";
 }
-
-function EstablecerIndiceInicial(indiceInicial,direccion){
-    if(direccion === "anterior"){
-        indiceInicial -= 12;
-    }else if (direccion === "siguiente"){
-        indiceInicial += 12;
-    }
-    if(indiceInicial < 0){
-        indiceInicial = 0;
-    }
-    return indiceInicial;
-}
-
-
-function CargarProductos(indiceInicial,data,direccion=null){
-    if(direccion){
-        document.getElementsByClassName("grid-productos")[0].innerHTML = "";
-        indiceInicial = EstablecerIndiceInicial(indiceInicial,direccion);
-    }
-    console.log(indiceInicial);
-    for(let i=indiceInicial;i<indiceInicial+12;i++){
-        if(i<data.length){
-            let producto = new Producto(data[i]["img"],data[i]["marca"],data[i]["modelo"],data[i]["precio"],data[i]["tipo"],data[i]["estado"]);
-            let elementoHTML = Producto.CrearElementoProductoGrilla(producto);
-            document.getElementsByClassName("grid-productos")[0].appendChild(elementoHTML)
-        }
-    }
-    return indiceInicial;
-}
-
 
 
 
@@ -174,8 +139,11 @@ async function EnviarProductoActualizado(producto){
         },
         body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
     });
-    if(!response.ok){
+    console.log(response.status);
+    if(response.status !== 200){
         Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
+    }else{
+        Swal.fire("El producto ha sido modficiado");
     }
 }
 
@@ -255,7 +223,6 @@ async function CargarProductosAsync(){
     await LimpiarDivAccion();
     await ObtenerTodosLosProductos();
     EscucharBtnModProducto();
-
 }
 
 

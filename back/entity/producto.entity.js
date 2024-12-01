@@ -26,7 +26,7 @@ const ProductoSequelize = sequelize.define(
       allowNull: false, // NOT NULL
     },
     tipo: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('casco', 'campera'),
       allowNull: false,
     },
     estado: {
