@@ -100,12 +100,17 @@ router.get("/productos/todos", async (req, res) => {
 
 //  AGREGAR MIDDLEWARE PARA LA RUTA DE LA IMAGEN! 
 //Crear nuevo producto
-router.post("/nuevo-producto",mw.validarId,mw.validarPrecio,mw.validarInfoTexto,async (req,res)=>{
-  const producto = req.body;
-  const resultado = await CrearProducto(producto);
-  if(resultado){
-    res.status(200).send({mensaje:"Producto agregado"});
-  }else{
+router.post("/nuevo-producto",mw.validarPrecio,mw.validarInfoTexto,async (req,res)=>{
+  try{
+    const producto = req.body;
+    const resultado = await CrearProducto(producto);
+    if(resultado){
+      res.status(200).send({mensaje:"Producto agregado"});
+    }else{
+      res.status(500).send({error:"Error al agregar el producto"});
+    }
+  }catch(err){
+    console.log(err);
     res.status(500).send({error:"Error al agregar el producto"});
   }
 });
@@ -113,7 +118,12 @@ router.post("/nuevo-producto",mw.validarId,mw.validarPrecio,mw.validarInfoTexto,
 
 //Subir imagen de producto
 router.post("/carga",upload.single("imagen"),mw.validarImagen,(req,res)=>{
-  res.send({ruta:req.savedFileName});
+  try{
+    console.log(req.savedFileName);
+    res.send({ruta:req.savedFileName});
+  }catch(err){
+    console.log(err);
+  }
 });
 
 
