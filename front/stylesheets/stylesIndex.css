@@ -5,12 +5,18 @@
     width: 100vw;
     height: 100vh;
     z-index: -2;
-    object-fit: cover; /* para que la imagen no se distorsione */
+    object-fit: cover; 
     opacity: 2;
     position: fixed;
 }
-body{
+body { 
     background-image: url("/back/public/images/fondoIndex.jpg");
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
+    width: 100%;
+    height: 100%;
+    margin: 0;  
 }  
 /* Contenedor que agrupa logo y formulario */
 .contenedor-logo-form {

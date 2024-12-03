@@ -43,7 +43,6 @@ const ventasRoutes = require("./routes/ventas.routes.js");
 const ticketRoutes = require("./routes/ticket.routes.js");
 const crearRoutes = require("./routes/crearUsuario.routes.js");
 const loginRoutes = require("./routes/crearUsuario.routes.js");
-const autocompletarRoutes = require("./routes/crearUsuario.routes.js");
 
 app.use("/productos", productoRoutes);
 app.use("/admin", adminRoutes);
@@ -51,7 +50,6 @@ app.use("/ventas", ventasRoutes);
 app.use("/ticket", ticketRoutes);
 app.use("/usuario", crearRoutes);
 app.use("/login", loginRoutes);
-app.use("/autocompletar", autocompletarRoutes);
 
 // Fin rutas
 conexion();
@@ -60,11 +58,9 @@ app.get("/", async (req, res) => {
   res.send("listo");
 });
 
-
 app.listen(process.env.PORT || 3000, () => {
   console.log("App started");
 });
-
 
 async function conexion(){
   try{
