@@ -1,4 +1,3 @@
-const express = require("express");
 const router = require("./producto.routes");
 const Venta = require("../model/venta.js");
 const mw = require("../middlewares/ventas.mw.js");
@@ -7,10 +6,14 @@ const mw = require("../middlewares/ventas.mw.js");
 router.post("/finalizar-compra",
     mw.validarListaIds,
     mw.validarNombreComprador,
-    async (req, res) => {    
-        const {nombreComprador,listaProductos} = req.body
-        const idVenta = await Venta.InsertarVenta(nombreComprador,listaProductos);
-        res.status(201).json({ idVenta: idVenta });
+    async (req, res) => {
+        try{
+            const {nombreComprador,productos} = req.body
+            const idVenta = await Venta.InsertarVenta(nombreComprador,productos);
+            res.status(201).json({ idVenta: idVenta });
+        }catch{
+            res.status(500).send("Algo fallo al concretar la venta");
+        } 
 });
 
 router.post("/mostrar-ticket",mw.validarId,async(req,res)=>{

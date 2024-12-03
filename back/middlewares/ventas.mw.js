@@ -1,5 +1,5 @@
 const validarNombreComprador = (req,res,next)=>{
-    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$/;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$/;
     const {nombreComprador} = req.body;
     if (nombreComprador === undefined || nombreComprador === null || nombreComprador === "") {
         return res.status(400).json({ error: "Nombre no ingresado" });
@@ -16,16 +16,16 @@ const validarNombreComprador = (req,res,next)=>{
 
 
 const validarListaIds = (req,res,next)=>{
-    const { listaProductos } = req.body;
-    for(producto of listaProductos){
+    const { productos } = req.body;
+    for(let producto of productos){
         if (producto.id === undefined || producto.id === null || producto.id === "") {
-            return res.status(400).json({ error: "Id no ingresado" });
+            return res.status(401).json({ error: "Id no ingresado" });
         }
         if (isNaN(producto.id)) {
-            return res.status(400).json({ error: "El id debe ser un número" });
+            return res.status(402).json({ error: "El id debe ser un número" });
         }
         if (Number(producto.id) < 0) {
-            return res.status(400).json({ error: "El id no puede ser negativo" });
+            return res.status(403).json({ error: "El id no puede ser negativo" });
         }
     }
 

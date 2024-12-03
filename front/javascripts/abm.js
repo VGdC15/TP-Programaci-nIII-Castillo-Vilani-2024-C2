@@ -1,5 +1,7 @@
 import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
+localStorage.setItem("indice",0);
+localStorage.setItem("vista","todos");
 
 //Boton INICIO
 document.getElementById("btn-inicio-abm").addEventListener("click",function(){
@@ -10,15 +12,27 @@ document.getElementById("btn-inicio-abm").addEventListener("click",function(){
 
 //Home >> Agregar
 document.getElementById("btn-agregar-nuevo").addEventListener("click",function(){
-    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"
+    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden";
     InsertarFormNuevoProducto();
 })
 
 
 //Home >> Modificar
-document.getElementById("btn-modificar-producto").addEventListener("click",function(){
-    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden" 
-    CargarProductosAsync();
+document.getElementById("btn-modificar-producto").addEventListener("click",async function(){
+    document.getElementsByClassName("opciones-principales")[0].style.visibility = "hidden"; 
+    document.getElementById("accion").style.visibility = "visible"; 
+    await ObtenerProductos();
+    await CrearBotones();       
+
+    document.getElementById("pagina-anterior").addEventListener("click",async function(){
+        await LimpiarGridProductos();
+        await ObtenerProductos("anterior");       
+    });
+
+    document.getElementById("pagina-siguiente").addEventListener("click",async function(){
+        await LimpiarGridProductos();
+        await ObtenerProductos("siguiente");       
+    });
 })
 
 // Asignar evento al botón de cierre
@@ -28,6 +42,59 @@ document.addEventListener("click", function (event) {
     }
 });
 
+async function SetIndice(direccion){
+    const indiceActual = localStorage.getItem("indice");
+    if(direccion === "siguiente"){
+        localStorage.setItem("indice",(parseInt(indiceActual,"10") + 4));
+    }else if(direccion === "anterior"){
+        if(indiceActual - 4 < 0){
+            localStorage.setItem("indice",0);
+        }else{
+            localStorage.setItem("indice",(parseInt(indiceActual,"10") - 4));        
+        }
+    }
+}
+
+async function CrearBotones(){
+    const div = document.createElement("div");
+    div.setAttribute("class","selector-paginas");
+    const btnAnt = document.createElement("button");
+    btnAnt.setAttribute("id","pagina-anterior");
+    btnAnt.textContent = "ANTERIOR";
+    const btnSig = document.createElement("button");
+    btnSig.setAttribute("id","pagina-siguiente");
+    btnSig.textContent = "SIGUIENTE";
+    div.appendChild(btnAnt);
+    div.appendChild(btnSig);
+    document.getElementById("accion").appendChild(div);
+}
+
+
+async function ObtenerProductos(direccion = 0){
+    try{
+        const indice = localStorage.getItem("indice");
+        const response = await fetch(`http://localhost:3000/admin/productos?indice=${indice}&direccion=${direccion}`);
+        if(response.status === 500){
+            Swal.fire("Error al conectarse con el servidor");
+        }
+        if(response.status === 201){
+            const resultado = await response.text();
+            if(resultado !== ""){
+                const gridProductos = await CrearGridProductos();
+                gridProductos.innerHTML = resultado;
+                document.getElementById("accion").insertBefore(gridProductos,document.getElementsByClassName("selector-paginas")[0]);
+                SetIndice(direccion);
+                EscucharBtnModProducto();
+            }
+        }
+        if(response.status === 100){
+
+        }
+    }catch(error){
+        console.error("Error al traer los datos:", error);
+        throw error;
+    }
+}
 
 function cerrarFormulario() {
     const formulario = document.querySelector('.form-agregar-producto');
@@ -50,7 +117,7 @@ async function InsertarFormNuevoProducto(){
 
 async function EscucharBtnFormNuevo(event){
     event.preventDefault();
-    // //Enviar imagen
+
     const resultado = await InsertarImagen();
     if(resultado){
         try{
@@ -166,6 +233,25 @@ async function LimpiarDivAccion(){
     document.getElementById("accion").innerHTML = "";
 }
 
+async function LimpiarGridProductos(){
+    try{
+        const grid = document.getElementsByClassName("grid-productos")[0];
+        grid.innerHTML = "";
+        return grid;
+    }catch{
+        return false;
+    }
+}
+
+async function CrearGridProductos(){
+    let grid = await LimpiarGridProductos();
+    if (grid == false){
+        grid = document.createElement("div");
+        grid.setAttribute("class","grid-productos");
+    }
+    return grid;
+}
+
 async function ObtenerTodosLosProductos(){
     try{
         const response = await fetch("http://localhost:3000/admin/productos/todos");
@@ -188,7 +274,6 @@ function EscucharBtnModProducto(){
     let botonesAct = document.getElementsByClassName("btn-activar");
     
     for(let i=0;i<productos.length;i++){
-        
         botonesAct[i].addEventListener("click",async()=>{
             EscucharBtnEstado(productos[i]);
         });
@@ -212,7 +297,7 @@ async function EscucharBtnEstado(producto){
         })
     });
     if(resultado.status === 200){
-        CargarProductosAsync();
+        ObtenerProductos();
     }else if(!resultado.ok){
         Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
     }

@@ -15,7 +15,7 @@ const validarId = (req, res, next) => {
 };
 
 const validarInfoTexto = (req,res,next)=>{
-    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9]+$/;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9 /-]+$/;
     const {marca,modelo,tipo} = req.body;
     const info = [marca,modelo,tipo];
     for(let campo of info){

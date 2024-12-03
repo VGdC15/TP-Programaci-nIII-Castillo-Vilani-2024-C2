@@ -157,10 +157,9 @@ async function finalizarCompra() {
             })
         });
 
-        if (response.ok) {
+        if (response.status === 201) {
             const data = await response.json()
             localStorage.setItem('idVenta', data.idVenta);
-
             Swal.fire({
                 title: '¡Compra realizada!',
                 text: 'Redirigiendo al ticket de compra...',
@@ -168,14 +167,13 @@ async function finalizarCompra() {
                 confirmButtonColor: '#ee7410',
                 showConfirmButton: true
             }).then(() => {
-                window.location.href = "ticket.html"; // Redirige al ticket
+                window.location.href = "ticket.html";
             });
 
-            localStorage.removeItem('carrito'); 
-            localStorage.removeItem("idVenta");
+            localStorage.removeItem('carrito');
             cargarProductosCarrito(); 
         } else {
-            Swal.fire('Error', 'Hubo un problema al procesar tu compra.', 'error');
+            Swal.fire('Error', "Hubo un error al finalizar la compra" , 'error');
         }
     } catch (error) {
         console.error('Error:', error);
