@@ -1,0 +1,51 @@
+html, body {
+    height: 100%; 
+}
+ 
+body{
+    background-image: url('/back/public/images/fondoCrearOscuro.jpg');
+    background-size: auto;  
+    background-position: center;  
+    background-repeat: no-repeat;  
+    width: 100%;
+    height: 100%;
+    margin: 0; 
+} 
+
+/* Formulario */
+.form-adm {
+    background: rgba(94, 23, 235, 0.8);
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px #5E17EB;
+    text-align: center;
+    max-width: 500px; 
+    width: 100%;
+    z-index: 2;
+
+}
+
+#titulo {
+    color:#fdfdfd;
+    text-align: left;
+    margin-bottom: 8%;
+}
+
+#crearCuenta{
+    background-color: rgba(188, 179, 214, 0.2);
+    border: none;
+    border-radius: 5px;
+}
+
+#crearCuenta:hover {
+    background-color: #0a0a0a;
+}
+
+#label {
+    color: white;
+    text-align: left; 
+}
+
+#email, #password {
+    background-color: rgba(188, 179, 214, 0.2);
+}
+

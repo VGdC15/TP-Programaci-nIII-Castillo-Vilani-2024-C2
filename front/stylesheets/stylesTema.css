@@ -1,0 +1,8 @@
+#mode-toggler {
+    color: var(--bs-warning);
+    font-size: 200%;
+    position: start;
+    top: 0%;
+    margin-left: 2%;
+    z-index: 9999;
+} 

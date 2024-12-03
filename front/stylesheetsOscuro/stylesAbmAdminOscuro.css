@@ -1,0 +1,376 @@
+/* ---------------------- ABM ADMIN ---------------------- */
+
+.main-abm{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 85vh;
+    height: fit-content;
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+body{
+    background-image: url('/back/public/images/ESTE.jpg');
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
+    width: 100%;
+    height: 100%;
+    margin: 0; 
+} 
+
+
+#btn-inicio-abm{
+    background-color: #fffafa;
+    color:#5e17eb;  
+    font-weight: 600;
+}
+
+.opciones-principales{
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 40vh;
+    padding: 20vh;
+} 
+
+.btn-cerrar {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    background: none;
+    border: none;
+    font-size: 280%;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.btn-cerrar:hover {
+    color: #ff7300;
+}
+
+
+.opciones-principales button{
+    background-color: #000000;
+       border: 1px solid white;
+    height: fit-content;
+    width: fit-content;
+    padding: 2vh;
+    border-radius: 10px;
+    border-style: hidden;
+    color: #ffffff;
+    font-family: "Afacad Flux";
+    font-weight: 400;
+    font-size: 4vh;
+}
+
+.opciones-principales button:hover{
+    color: #ffffff;
+    background-color: rgba(94, 23, 235, 0.8); 
+   
+}
+
+.icono-desactivado{
+    position: absolute;
+    top: 1vh; 
+    right: 1vh;
+    font-size: 5vh;
+    z-index: 10;
+}
+
+
+.opciones{
+    background-color: #46006760;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+
+.opciones button{
+    width:fit-content;
+    margin: 0.5vh;
+    border-radius: 16px;
+    border-style: hidden;
+    font-family:"Jost";
+    font-size:large;
+}
+
+.opciones button:hover{
+    background-color: #ff7300;
+}
+
+#accion{
+    visibility: hidden;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 70vw;
+    min-height: 85vh;
+    height: fit-content;
+}
+
+.form-agregar-producto{
+    border:2px solid #0000002f;
+    height:80%;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-agregar:hover {
+    box-shadow: 0px 0px 10px #5E17EB;
+}
+
+#div-inputs-texto{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width: 100%;
+    height: 80%;
+    padding: 2%;
+}
+
+#div-inputs-texto label{
+    font-family: "Jost";
+    font-weight: 400;
+}
+
+#div-inputs-texto input{
+    border-style: hidden;
+    background-color: #c9c9c9;
+    color:#000000   
+}
+
+#div-inputs-texto input::placeholder{
+    color:#000000;
+}
+
+#div-inputs-texto #div-descripcion{
+    flex-grow: 4;
+}
+
+
+.div-input{
+    flex-grow: 1; 
+}
+
+.div-input label{
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+.div-input input{
+    width: 90%;
+    margin-right: 1vh;
+    margin-left: 1vh;
+    border-radius: 5px;
+}
+
+#div-descripcion label{
+    margin-left: 1vh;
+}
+
+#div-descripcion textarea{
+    height: 80%;
+    width: 90%;
+    margin-left: 1vh;
+    resize: none;
+    border-radius: 5px;
+    border-style: hidden;
+    background-color: #c9c9c9;
+    color:#000000;   
+}
+
+
+#div-imagenes-boton{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    width: 100%;
+    padding: 2%;
+}
+
+#div-imagenes-boton button{
+    border-radius: 10px;
+    border-style: hidden;
+    background-color: #000000;
+    color:#ffffff;
+    height:7vh;
+    margin-top: 2vh;
+}
+
+.div-imagenes{
+    margin-bottom: 2vh;
+}
+
+.form-modificar-producto{
+    border:2px solid red;
+    width: 100vw;
+    height: 100vh;
+}
+
+#pantalla-modificar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3vh;
+    width: 95%;
+}
+
+.div-info-producto{
+    width:90%;
+    margin-top: 2vh;
+}
+.div-info-producto p{
+    font-size: 1.2em;
+}
+.div-info-producto p:nth-child(1){
+    font-weight: bold;
+}
+
+.btn-back-home{
+    position: absolute;
+    top: 0;  
+    left: 0;  
+    margin:1vh;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: hidden;
+    background-color: #bf3f10;
+    color: #ffffff;
+}
+
+
+.div-boton-icono{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icono-opciones{
+    width: 100px;
+}
+
+
+@media (max-width: 576px) {
+        /* Productos */
+    .grid-productos{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    } 
+    .opciones button{
+        font-size: x-large;
+    }   
+    .portada-listado-productos{
+        height: 30vh;
+    }
+    .portada-listado-productos img{
+        height:30vh;
+    } 
+   
+    .main-nav{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo-nav{
+        width:50vw;
+    } 
+    #accion{
+        width: 100vw;
+    }
+    #div-inputs-texto{
+        padding: 1vh;
+    }
+    #div-imagenes-boton{
+        padding:1vh;
+    }
+    .opciones-principales{
+        flex-direction: column;
+        padding: 2%;
+        justify-content: center;
+        height:fit-content;
+    }
+    .opciones-principales button{
+        height: fit-content;
+        font-size: small;
+        margin: 1vh;
+    }
+    #btn-inicio-abm{
+        font-size:large;
+        width:30vw;
+        height: fit-content;
+    }
+    .form-agregar-producto{
+        flex-direction: column;
+    }
+    #input-agregar-imagenes{
+        max-width: 100%;
+    }
+}
+
+
+@media (min-width:577px) and (max-width:1200px) and (min-height:800px){
+    .logo-nav{
+        width:35vw;
+    } 
+    #btn-inicio-abm{
+        font-size:large;
+        width:15vw;
+        max-width: 10%;
+        height: fit-content;
+    }
+    .opciones-principales{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .opciones-principales button{
+        height: fit-content;
+        font-size: large;
+        margin: 1vh;
+    }
+    .icono-opciones{
+        width: 20vw;
+    }
+
+
+    #accion{
+        width:100vw;
+    }
+    .form-agregar-producto{
+        flex-direction: column;
+    }   
+    .opciones button{
+        font-size:x-large;
+    }
+
+    .grid-productos{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+
+@media (min-width:1700px){
+    .opciones button{
+        font-size: x-large;
+    }       
+}
+
+footer{
+    width: 100vw;
+}

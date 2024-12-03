@@ -2,7 +2,16 @@ html, body {
     height: 100%; 
 }
 
-
+body{
+    background-image: url("/back/public/images/fondoCrear.jpg");
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
+    width: 100%;
+    height: 100%;
+    margin: 0; 
+}  
+ 
 
 /* Formulario */
 .form-adm {

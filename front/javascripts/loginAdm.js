@@ -1,11 +1,21 @@
 import Swal from "../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('email').value = "";
+    document.getElementById('password').value= "";
     // Asigna evento al botón
     const ingresarBoton = document.getElementById("Ingresar");
     ingresarBoton.addEventListener("click", ingresar);
+
+    const autocompletarBoton = document.getElementById("Autocompletar");
+    autocompletarBoton.addEventListener("click", autocompletar);
 });
+
+function autocompletar() {
+    document.getElementById('email').value = "vero@gmail.com";
+    document.getElementById('password').value= "1234";
+
+}
 
 async function ingresar() {
     const email = document.getElementById('email').value.trim();
@@ -31,7 +41,7 @@ async function ingresar() {
                 password 
             }),
         });
-
+ 
         if (response.ok) {
             const result = await response.json();
             Swal.fire({
