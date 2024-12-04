@@ -31,16 +31,6 @@ function desencriptar(iv, passEncriptada) {
   return decifrado;
 }
 
-// const desencriptar = (passEncriptada, iv) => {
-//   const decipher = crypto.createDecipheriv(
-//       algoritmo,
-//       Buffer.from(claveSecretaDelServer),
-//       Buffer.from(iv, "hex")
-//   );
-//   let desencriptado = decipher.update(passEncriptada, "hex", "utf8");
-//   desencriptado += decipher.final("utf8");
-//   return desencriptado;
-// };
 
 function registro(pass) {
     return encriptar(pass);
