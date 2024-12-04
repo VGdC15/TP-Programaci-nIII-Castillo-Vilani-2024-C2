@@ -6,12 +6,14 @@ html, body {
 }
 
 /* Footer */
-footer {
-    flex-shrink: 0;
-    width: 100%;
-    z-index: 1;
-}
-
 footer div {
     color: #888888;
 }
+
+footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+

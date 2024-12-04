@@ -47,7 +47,7 @@ h1 {
     margin-left: 2%;
     margin-right: 2%; 
     font-size: 1.2rem;
-    height: 45%; 
+    height: 250px; 
     max-height: 400px; 
     
 }
@@ -126,6 +126,7 @@ h1 {
         flex: 0 0 30%; 
         padding-top: 0%; 
         padding-left: 2%;
+
     }
 
     #checkout-button {
@@ -151,6 +152,7 @@ h1 {
     #cart-summary{
         width: 95%;
         margin-bottom: 5%;
+        height: 180px;
     }
 
     #cart-summary h5 {
