@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function autocompletar() {
     document.getElementById('email').value = "vero@gmail.com";
-    document.getElementById('password').value= "1234";
+    document.getElementById('password').value= "Vero12345";
 
 }
 
