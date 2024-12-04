@@ -66,7 +66,7 @@ router.post("/modificar",
     const productoFront = req.body;
     try{
       await AC.ActualizarDatosProducto(productoFront.id,productoFront);
-      res.status(200).send("Producto modificado");
+      res.status(200);
     }catch(error){
       res.status(500).json({message:error.message});
     }
@@ -78,6 +78,7 @@ router.post("/cambiar-estado", mw.validarId,mw.validarEstado, async (req,res)=>{
   const {estado,id} = req.body;
   const resultado = await AC.CambiarEstado(estado,id);
   if(resultado){
+    console.log("cambio de estado");
     res.status(200).json({ mensaje: 'El estado del producto ha si modificado' });
   }else{
     res.status(500);

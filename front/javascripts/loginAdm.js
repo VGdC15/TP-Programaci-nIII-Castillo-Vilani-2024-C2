@@ -31,8 +31,7 @@ async function ingresar() {
         return;
     }
 
-    try {
-        //envío de datos al servidor
+        // envío de datos al servidor
         const response = await fetch('http://localhost:3000/usuario/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -41,9 +40,10 @@ async function ingresar() {
                 password 
             }),
         });
- 
-        if (response.ok) {
-            const result = await response.json();
+        
+        const result = await response.json();
+        
+        if (response.status === 200) {
             Swal.fire({
                 icon: 'success',
                 title: 'Ingreso exitoso',
@@ -52,19 +52,19 @@ async function ingresar() {
             }).then(() => {
                 window.location.href = "../html/abm-admin.html"; 
             });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de ingreso',
-                text: errorText,
-            });
-        }
-
-    } catch (error) {
-        console.error('Error:', error);
-        Swal.fire('Error', 'No se pudo conectar con el servidor. Intenta más tarde.', 'error');
-    }
-       
+        }else{
+            if(result.message === undefined){
+                Swal.fire({icon:"error",
+                    title:"Error",
+                    text:result.error}
+                );
+            }else{
+                Swal.fire({icon:"error",
+                    title:"Error",
+                    text:result.message}
+                );
+            }
+        }   
 }
 
 
