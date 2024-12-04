@@ -110,6 +110,7 @@ body{
 }
 
 #accion{
+    flex-direction: column;
     visibility: hidden;
     position:relative;
     display: flex;

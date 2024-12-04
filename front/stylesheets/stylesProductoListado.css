@@ -103,7 +103,7 @@
 .producto:hover .BtnAgregarCarrito {
     opacity: 1; 
 }
-
+ 
 .selector-paginas{
     display: flex;
     justify-content: space-between;
