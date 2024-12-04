@@ -311,3 +311,51 @@ async function EscucharBtnEstado(producto){
         Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnPdfVentas = document.getElementById("btn-pdf-ventas");
+  
+    btnPdfVentas.addEventListener("click", descargarExcel);
+});
+  
+async function descargarExcel() {
+    try {
+        const response = await fetch('http://localhost:3000/admin/excel', {
+            method: 'GET'
+        });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Ventas_Riders_Edge.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+
+            await Swal.fire({
+            title: 'Descarga exitosa',
+            text: 'El archivo Excel se ha descargado exitosamente',
+            icon: 'success',
+            confirmButtonText: 'OK'
+            });
+        } else {
+            throw new Error('Error en la descarga');
+        }
+    } catch (error) {
+        console.error('Error al descargar el archivo:', error);
+        await Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al descargar el archivo. Inténtalo de nuevo más tarde.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+  
+
+  
+  

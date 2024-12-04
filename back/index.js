@@ -66,7 +66,7 @@ async function conexion(){
   try{
     await sequelize.authenticate();
     await relacionar();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
   }catch(err){
     console.error("Error al conectar",err);
   }
