@@ -6,6 +6,10 @@ const PC = require("../controllers/producto.controller.js");
 const mw = require("../middlewares/admin-mw.js");
 const multer = require("multer");
 
+const XLSX = require("xlsx");
+const sequelize = require("../db/sequelize"); 
+const VentaSequelize = require("../entity/venta.entity");
+
 
 //    \(º_º)/  MOVER  \(º_º)/
 const storage = multer.diskStorage({
@@ -118,7 +122,6 @@ router.get("/productos",async (req,res)=>{
 })
 
 
-
 //Crear nuevo producto
 router.post("/nuevo-producto",mw.validarPrecio,mw.validarInfoTexto,async (req,res)=>{
   try{
@@ -145,58 +148,19 @@ router.post("/carga",upload.single("imagen"),mw.validarImagen,(req,res)=>{
   }
 });
 
-
-
-// async function CambiarEstado(estado,id){
-//   const nuevoEstado = estado === 0 ? 1 : 0;
-//   try{
-//     const [filasActualizadas] = await ProductoSequelize.update(
-//       { estado: nuevoEstado },
-//       { where: { idProductos: id } }
-//     );
-  
-//     return filasActualizadas > 0;
-//   }catch{
-//     return false;
-//   }
-// }
-
-
-// async function CrearProducto(producto) {
-//   try {
-//     const nuevoProducto = await ProductoSequelize.create({
-//       marca: producto.marca,
-//       modelo: producto.modelo,
-//       precio: producto.precio,
-//       imagen: producto.imagen,
-//       tipo: producto.tipo,
-//       descripcion: producto.descripcion
-//     });
-//     console.log('Producto creado:', nuevoProducto.toJSON());
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-
-// async function ActualizarDatosProducto(id,productoActualizado) {
-//   try{
-//     const resultado = await ProductoSequelize.update({ 
-//       marca: productoActualizado.marca, 
-//       modelo: productoActualizado.modelo, 
-//       precio: productoActualizado.precio, 
-//       tipo: productoActualizado.tipo, 
-//       descripcion: productoActualizado.descripcion
-//     }, { where: { idProductos:id },});
-//     if (resultado[0] === 0) {
-//       throw new Error("Producto no encontrado");
-//     }
-//   } catch (error) {
-//     throw new Error(error.message || "Error al actualizar el producto");
-//   }
-// }
-
-
+//descarga excel
+router.get("/excel", async (req, res) => {
+  const ventasConProductos = await VentaSequelize.findAll({
+    include: ProductoSequelize
+  });
+  const ventasconp = ventasConProductos.map(venta => {
+    const jsonVenta = venta.toJSON();
+    return {
+        ...jsonVenta,
+        productos: jsonVenta.Productos // Incluye la asociación de productos
+    };
+  });
+  res.send(ventasconp);
+});
 
 module.exports = router;
