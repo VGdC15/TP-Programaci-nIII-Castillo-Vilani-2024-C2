@@ -9,14 +9,14 @@
     opacity: 2;
     position: fixed;
 }
-body{
+body { 
     background-image: url("/back/public/images/fondoIndexOscuro.jpg");
     background-size: cover;  
     background-position: center;  
     background-repeat: no-repeat;  
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin: 0;  
 }  
 /* Contenedor que agrupa logo y formulario */
 .contenedor-logo-form {
@@ -29,10 +29,10 @@ body{
 }
 
 #logo {
-    width: 70%;
-    max-width: 300px; 
+    width: 100%;
+    max-width: 400px; 
     height: auto;
-    margin-bottom: 0;
+    margin-bottom: 0%;
 }
 
 /* Formulario */
@@ -42,9 +42,10 @@ body{
     box-shadow: 0px 0px 10px #5E17EB;
     text-align: center;
     max-width: 500px; 
-    margin-top: 0;
+    margin-top: 2px;
     margin-bottom: 5%;
     width: 100%;
+    z-index: 3;
 }
 
 /* Botón aceptar */
@@ -56,6 +57,10 @@ body{
 
 #aceptar:hover {
     background-color: #0a0a0a;
+}
+
+#btnlogin {
+    color: white;
 }
 
 #label {

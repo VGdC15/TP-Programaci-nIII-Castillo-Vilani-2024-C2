@@ -29,10 +29,10 @@ body {
 }
 
 #logo {
-    width: 70%;
-    max-width: 300px; 
+    width: 100%;
+    max-width: 400px; 
     height: auto;
-    margin-bottom: 0;
+    margin-bottom: 0%;
 }
 
 /* Formulario */
@@ -42,9 +42,10 @@ body {
     box-shadow: 0px 0px 10px #5E17EB;
     text-align: center;
     max-width: 500px; 
-    margin-top: 0;
+    margin-top: 2px;
     margin-bottom: 5%;
     width: 100%;
+    z-index: 3;
 }
 
 /* Botón aceptar */
