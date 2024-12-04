@@ -3,6 +3,7 @@ const ProductoSequelize = require("../entity/producto.entity.js");
 
 async function CambiarEstado(estado,id){
     const nuevoEstado = estado === 0 ? 1 : 0;
+    console.log(`estado: ${estado}, nuevo: ${nuevoEstado}`);
     try{
       const [filasActualizadas] = await ProductoSequelize.update(
         { estado: nuevoEstado },

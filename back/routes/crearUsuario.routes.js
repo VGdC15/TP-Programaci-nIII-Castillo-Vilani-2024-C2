@@ -29,9 +29,8 @@ router.post("/crearUsuario",mw.validarContraseña,mw.validarEmail, async (req, r
 
 
 // Ruta para ingresar usuarios
-router.post("/login", async (req, res) => {
+router.post("/login",mw.validarContraseña, mw.validarEmail, async (req, res) => {
     const { email, password } = req.body;
-
     try {
         const usuario = await UsuarioSequelize.findOne({ where: { email } });
 

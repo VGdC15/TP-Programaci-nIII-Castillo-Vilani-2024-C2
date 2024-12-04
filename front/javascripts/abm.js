@@ -25,12 +25,10 @@ document.getElementById("btn-modificar-producto").addEventListener("click",async
     await CrearBotones();       
 
     document.getElementById("pagina-anterior").addEventListener("click",async function(){
-        await LimpiarGridProductos();
         await ObtenerProductos("anterior");       
     });
 
     document.getElementById("pagina-siguiente").addEventListener("click",async function(){
-        await LimpiarGridProductos();
         await ObtenerProductos("siguiente");       
     });
 })
@@ -80,6 +78,7 @@ async function ObtenerProductos(direccion = 0){
         if(response.status === 201){
             const resultado = await response.text();
             if(resultado !== ""){
+                await LimpiarGridProductos();
                 const gridProductos = await CrearGridProductos();
                 gridProductos.innerHTML = resultado;
                 document.getElementById("accion").insertBefore(gridProductos,document.getElementsByClassName("selector-paginas")[0]);
@@ -87,10 +86,8 @@ async function ObtenerProductos(direccion = 0){
                 EscucharBtnModProducto();
             }
         }
-        if(response.status === 100){
-
-        }
     }catch(error){
+        Swal.fire("Error","No se pudo conectar con el servidor, intente mas tarde");
         console.error("Error al traer los datos:", error);
         throw error;
     }
@@ -206,9 +203,11 @@ async function EnviarProductoActualizado(producto){
         },
         body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
     });
-    console.log(response.status);
+    
+    const result = await response.json();
+    
     if(response.status !== 200){
-        Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
+        Swal.fire('Error', result.error, 'error');
     }else{
         Swal.fire("El producto ha sido modficiado");
     }
@@ -229,9 +228,6 @@ async function InsertarNuevoProducto(producto){
     }
 }
 
-async function LimpiarDivAccion(){
-    document.getElementById("accion").innerHTML = "";
-}
 
 async function LimpiarGridProductos(){
     try{
@@ -251,22 +247,6 @@ async function CrearGridProductos(){
     }
     return grid;
 }
-
-async function ObtenerTodosLosProductos(){
-    try{
-        const response = await fetch("http://localhost:3000/admin/productos/todos");
-        const resultado = await response.text();
-        let divGrid = document.createElement("div");
-        divGrid.setAttribute("class","grid-productos");
-        divGrid.innerHTML = resultado;
-        document.getElementById("accion").appendChild(divGrid);
-        document.getElementById("accion").style.visibility = "visible";       
-    }catch(error){
-        console.error("Error al traer los datos:", error);
-        throw error;
-    }
-}
-
 
 function EscucharBtnModProducto(){
     let productos = document.getElementsByClassName("producto");
@@ -293,21 +273,12 @@ async function EscucharBtnEstado(producto){
         },
           body: JSON.stringify({
             id:producto.getAttribute("data-id"),
-            estado:producto.getAttribute("data-estado")  
+            estado:parseInt(producto.getAttribute("data-estado"))  
         })
     });
     if(resultado.status === 200){
-        ObtenerProductos();
+        await ObtenerProductos();
     }else if(!resultado.ok){
         Swal.fire('Error', 'Verifique los datos ingresados o intente más tarde.', 'error');
     }
 }
-
-
-async function CargarProductosAsync(){
-    await LimpiarDivAccion();
-    await ObtenerTodosLosProductos();
-    EscucharBtnModProducto();
-}
-
-
