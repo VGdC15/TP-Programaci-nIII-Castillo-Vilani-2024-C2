@@ -42,7 +42,8 @@ async function CambiarEstado(estado,id){
         modelo: productoActualizado.modelo, 
         precio: productoActualizado.precio, 
         tipo: productoActualizado.tipo, 
-        descripcion: productoActualizado.descripcion
+        descripcion: productoActualizado.descripcion,
+        imagen:productoActualizado.imagen
       }, { where: { idProductos:id },});
       if (resultado[0] === 0) {
         throw new Error("Producto no encontrado");

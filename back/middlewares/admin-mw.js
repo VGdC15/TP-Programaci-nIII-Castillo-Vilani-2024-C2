@@ -21,15 +21,12 @@ const validarInfoTexto = (req,res,next)=>{
     for(let campo of info){
         console.log(campo);
         if(campo === undefined || campo === null || campo === ""){
-            console.log("vacio");
             return res.status(400).json({error: "Los campos no deben estar vacios"});
         }
         if(typeof campo !== "string"){
-            console.log("no es string");
             return res.status(400).json({error:"El nombre debe ser una palabra"});
         }
         if(!regex.test(campo)){
-            console.log("no es una palabra");
             return res.status(400).json({error:"El nombre debe ser una palabra"});
         }
     }

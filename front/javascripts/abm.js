@@ -183,15 +183,7 @@ async function InsertarFormModProducto(idProducto){
 
 async function EscuhcarBtnFormMod(event,id){
     event.preventDefault();
-    const producto = {
-        id:id,
-        marca: event.target.marca.value,
-        modelo: event.target.modelo.value,
-        precio: event.target.precio.value,
-        tipo: event.target.tipo.value,
-        descripcion: event.target.descripcion.value,
-    };
-    EnviarProductoActualizado(producto);
+    ActualizarProducto(event,id);
     event.target.reset();
 }
 
@@ -201,7 +193,7 @@ async function EnviarProductoActualizado(producto){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
+        body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,imagen:producto.imagen}),
     });
     
     const result = await response.json();
@@ -210,6 +202,35 @@ async function EnviarProductoActualizado(producto){
         Swal.fire('Error', result.error, 'error');
     }else{
         Swal.fire("El producto ha sido modficiado");
+    }
+}
+
+
+async function ActualizarProducto(event,id){
+    const resultado = await InsertarImagen();
+    if(resultado){
+        try{
+            const {ruta} = await resultado.json();
+            const producto = {
+                id:id,
+                marca: event.target.marca.value,
+                modelo: event.target.modelo.value,
+                precio: parseInt(event.target.precio.value),
+                tipo: event.target.tipo.value,
+                descripcion: event.target.descripcion.value,
+                imagen:ruta
+            };
+            const resultadoProducto = await EnviarProductoActualizado(producto);
+            if(resultadoProducto){
+                Swal.fire('Producto cargado exitosamente.');    
+            }else{
+                Swal.fire('Error', 'Error al cargar el producto.', 'error');
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }else{
+        Swal.fire('Error', 'Error al cargar el producto.', 'error');
     }
 }
 
