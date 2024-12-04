@@ -160,7 +160,14 @@ router.get("/excel", async (req, res) => {
         productos: jsonVenta.Productos 
     };
   });
-  res.send(ventasconp);
+
+  const libro = XLSX.utils.book_new();
+  const hoja = XLSX.utils.json_to_sheet(ventasconp);
+  XLSX.utils.book_append_sheet(libro,hoja,"Ventas");
+  const buffer = XLSX.write(libro,{type:"buffer"});
+  res.type("application/excel");
+  res.attachment("Ventas.xlsx");
+  res.send(buffer);
 });
 
 
