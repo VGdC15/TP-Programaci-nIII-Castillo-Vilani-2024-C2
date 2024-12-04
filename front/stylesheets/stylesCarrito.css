@@ -1,6 +1,5 @@
 html, body {
     height: 100%;
-    background-color: #222222; 
     color: white;
 }
 
@@ -10,7 +9,7 @@ h1 {
     padding-top: 5%;
     font-size: 2rem;
 
-}
+} 
 
 /* Estilos del carrito de compras */
 .cart-item {
@@ -48,6 +47,9 @@ h1 {
     margin-left: 2%;
     margin-right: 2%; 
     font-size: 1.2rem;
+    height: 45%; 
+    max-height: 400px; 
+    
 }
 
 #cart-summary h5 {
