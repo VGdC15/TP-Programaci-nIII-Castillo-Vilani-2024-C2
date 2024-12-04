@@ -180,21 +180,41 @@ async function InsertarFormModProducto(idProducto){
     }
 }
 
-
-async function EscuhcarBtnFormMod(event,id){
+async function EscuhcarBtnFormMod(event, id) {
     event.preventDefault();
+
     const producto = {
-        id:id,
+        id: id,
         marca: event.target.marca.value,
         modelo: event.target.modelo.value,
         precio: event.target.precio.value,
         tipo: event.target.tipo.value,
         descripcion: event.target.descripcion.value,
     };
-    EnviarProductoActualizado(producto);
+
+    try {
+        await EnviarProductoActualizado(producto);
+        await Swal.fire({
+            title: 'Producto modificado',
+            text: 'El producto ha sido modificado exitosamente',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+       
+    } catch (error) {
+        console.error('Error al modificar el producto:', error);
+        await Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al modificar el producto. Inténtalo de nuevo más tarde.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+
     event.target.reset();
 }
 
+ 
 async function EnviarProductoActualizado(producto){
     const response = await fetch("http://localhost:3000/admin/modificar",{
         method: 'POST',
@@ -204,12 +224,21 @@ async function EnviarProductoActualizado(producto){
         body: JSON.stringify({id:producto.id,marca:producto.marca,modelo:producto.modelo,precio:producto.precio,tipo:producto.tipo,descripcion:producto.descripcion,}),
     });
     
-    const result = await response.json();
-    
-    if(response.status !== 200){
-        Swal.fire('Error', result.error, 'error');
-    }else{
-        Swal.fire("El producto ha sido modficiado");
+    if (response.ok) {
+        const result = await response.json();
+        Swal.fire({
+            icon: 'success',
+            title: 'El producto ha sido modficiado',
+            confirmButtonColor: '#ee7410',
+            showConfirmButton: true,
+        });
+    } else {
+        const error = await response.json();
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al modificar el producto',
+            text: error.error || 'No se pudo modificar el producto',
+        });
     }
 }
 
