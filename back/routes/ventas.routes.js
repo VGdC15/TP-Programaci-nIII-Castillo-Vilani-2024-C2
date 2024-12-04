@@ -6,12 +6,17 @@ const ProductoSequelize = require("../entity/producto.entity.js");
 const Venta = require("../model/venta.js");
 
 //ventas
-router.post("/consulta",async(req,res)=>{
+router.get("/consulta",async(req,res)=>{
     const ventasConProductos = await VentaSequelize.findAll({
         include: ProductoSequelize
     });
-    console.log(ventasConProductos);
-    res.send(ventasConProductos);
+    const ventasJSON = ventasConProductos.map(venta => {
+        const jsonVenta = venta.toJSON();
+        return {
+            ...jsonVenta
+        }
+    });
+    res.send(ventasJSON);
 })
 
 router.post("/insertar",async(req,res)=>{

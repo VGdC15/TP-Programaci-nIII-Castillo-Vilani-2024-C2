@@ -157,7 +157,7 @@ router.get("/excel", async (req, res) => {
     const jsonVenta = venta.toJSON();
     return {
         ...jsonVenta,
-        productos: jsonVenta.Productos // Incluye la asociación de productos
+        productos: jsonVenta.Productos 
     };
   });
 
